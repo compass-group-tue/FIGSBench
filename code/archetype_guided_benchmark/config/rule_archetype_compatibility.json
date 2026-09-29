@@ -1,0 +1,82 @@
+{
+  "schema_version": 2,
+  "description": "Compatible archetypes per atomic rule. Final-benchmark grid cells are rule x domain x severity; one archetype is attached per slot by seeded rotation within each rule's list.",
+  "sycophancy": {
+    "S1.a": [
+      "E",
+      "G",
+      "H",
+      "I",
+      "J",
+      "L",
+      "M"
+    ],
+    "S1.b": [
+      "A",
+      "B",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M"
+    ],
+    "S1.c": [
+      "A",
+      "B",
+      "E",
+      "K"
+    ],
+    "S2.a": [
+      "A",
+      "D",
+      "I",
+      "L",
+      "M"
+    ],
+    "S2.b": [
+      "B",
+      "F",
+      "H",
+      "J",
+      "K"
+    ],
+    "S2.c": [
+      "A",
+      "E",
+      "F",
+      "G"
+    ],
+    "S2.d": [
+      "D",
+      "H",
+      "I"
+    ]
+  },
+  "calibrated_validation": {
+    "V1": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "A6"
+    ],
+    "V2": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A6"
+    ],
+    "V3": [
+      "A2",
+      "A5",
+      "A6"
+    ]
+  }
+}

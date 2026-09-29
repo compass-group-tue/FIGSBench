@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "figsbench"
+version = "1.0.0"
+description = "FIGS: Evaluating Multi-Turn Sycophancy Without Penalizing Empathy"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE", "DATA_LICENSE.md"]
+authors = [{name = "The FIGS Authors"}]
+keywords = ["FIGS", "benchmark", "language-models", "evaluation", "sycophancy"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+sycbench-validate = "benchmark.data_schema:main"
+sycbench-score = "benchmark.metrics:main"
+
+[tool.setuptools]
+package-dir = {"" = "code"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["code"]
+namespaces = false
+
+[tool.setuptools.package-data]
+archetype_guided_benchmark = [
+  "config/*.json",
+  "data/*.json",
+  "prompt_templates/*.txt",
+  "prompt_templates/*/*.txt",
+  "prompt_templates/*/*/*.txt",
+]
+benchmark = ["config/*.json", "config/*.txt"]
+rule_guided_benchmark = [
+  "config/*.json",
+  "prompt_checkpoints/*/*.txt",
+  "prompt_templates/*.txt",
+]
+rule_guided_judging = ["*.json", "*.txt"]
+sft_data = ["data/runs/*/*.json"]
+source_corpus = ["data/training_seeds/*/manifest.json"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]

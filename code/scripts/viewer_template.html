@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FIGS — 500-sample viewer</title>
+<style>
+:root {
+  --bg: #f7f6f3; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6a66; --faint: #9a9892;
+  --line: #e4e2dc; --soft: #f0eee9; --accent: #2d5bd7; --accent-soft: #e8eefc;
+  --syc: #b4441f; --syc-soft: #fbece6; --cv: #1f7a5a; --cv-soft: #e5f4ee;
+  --user: #eef1f6; --asst: #ffffff; --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151515; --panel: #1d1d1d; --ink: #ecebe7; --muted: #a3a19b; --faint: #75736e;
+    --line: #2e2e2c; --soft: #252524; --accent: #7fa2ff; --accent-soft: #222c44;
+    --syc: #f08a63; --syc-soft: #3a241c; --cv: #5cc79e; --cv-soft: #19302a;
+    --user: #242a33; --asst: #1d1d1d; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--ink); font: 14px/1.55 var(--sans); }
+button, select, input { font: inherit; color: inherit; }
+.app { display: grid; grid-template-columns: 360px 1fr; height: 100vh; }
+aside { border-right: 1px solid var(--line); background: var(--panel); display: flex; flex-direction: column; min-height: 0; }
+.brand { padding: 18px 18px 12px; border-bottom: 1px solid var(--line); }
+.brand h1 { font-size: 15px; margin: 0; letter-spacing: -0.01em; }
+.brand p { margin: 4px 0 0; color: var(--muted); font-size: 12.5px; }
+.filters { padding: 12px 18px; display: grid; gap: 8px; border-bottom: 1px solid var(--line); }
+.filters input[type=search] { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.filters .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.filters select { width: 100%; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); min-width: 0; }
+.seg { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { flex: 1; border: 0; background: transparent; padding: 6px 4px; cursor: pointer; font-size: 12.5px; color: var(--muted); }
+.seg button.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.count { color: var(--muted); font-size: 12px; display: flex; justify-content: space-between; }
+.count a { color: var(--accent); cursor: pointer; text-decoration: none; }
+.list { overflow-y: auto; flex: 1; min-height: 0; }
+.item { padding: 10px 18px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.item:hover { background: var(--soft); }
+.item.on { background: var(--accent-soft); box-shadow: inset 3px 0 0 var(--accent); }
+.item .top { display: flex; gap: 6px; align-items: center; font-size: 12px; }
+.item .id { font-family: var(--mono); font-weight: 600; font-size: 12px; }
+.item .snip { color: var(--muted); font-size: 12.5px; margin-top: 3px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+main { overflow-y: auto; min-height: 0; }
+.wrap { max-width: 900px; margin: 0 auto; padding: 28px 32px 80px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 1px 8px; border-radius: 999px; font-size: 11.5px; background: var(--soft); color: var(--muted); white-space: nowrap; }
+.chip.syc { background: var(--syc-soft); color: var(--syc); }
+.chip.cv { background: var(--cv-soft); color: var(--cv); }
+.chip.acc { background: var(--accent-soft); color: var(--accent); }
+.head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px 16px; flex-wrap: wrap; }
+.head h2 { font: 600 22px/1.2 var(--mono); margin: 0 0 8px; letter-spacing: -0.02em; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.nav { display: flex; gap: 6px; flex-shrink: 0; }
+.nav button { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+.nav button:hover { border-color: var(--faint); }
+section.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; margin-top: 18px; }
+section.card > h3 { margin: 0; padding: 12px 18px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+.body { padding: 14px 18px; }
+.rule-title { font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+.prose { white-space: pre-wrap; word-wrap: break-word; }
+.sub { color: var(--muted); font-size: 12px; font-weight: 600; margin: 12px 0 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+details > summary { cursor: pointer; color: var(--accent); font-size: 13px; margin-top: 10px; }
+.tabs { display: flex; gap: 2px; padding: 0 12px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+.tabs button { border: 0; background: none; padding: 10px 10px; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; white-space: nowrap; font-size: 13px; }
+.tabs button.on { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+.note { color: var(--muted); font-size: 12.5px; background: var(--soft); border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; }
+.turns { display: grid; gap: 12px; }
+.turn { border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; }
+.turn.user { background: var(--user); margin-right: 48px; }
+.turn.assistant { background: var(--asst); margin-left: 48px; }
+.turn .who { font-size: 11.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 14px; font-size: 13px; }
+.kv div:nth-child(odd) { color: var(--muted); }
+.kv code { font-family: var(--mono); font-size: 12.5px; }
+mark { background: #ffe58a; color: inherit; border-radius: 2px; }
+@media (prefers-color-scheme: dark) { mark { background: #6b5a12; } }
+.empty { color: var(--muted); padding: 40px 18px; text-align: center; }
+.kbd { font-family: var(--mono); font-size: 11px; border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; }
+@media (max-width: 860px) {
+  .app { grid-template-columns: 1fr; grid-template-rows: 46vh 1fr; }
+  aside { border-right: 0; border-bottom: 1px solid var(--line); }
+  .wrap { padding: 18px 16px 60px; }
+  .turn.user { margin-right: 0; } .turn.assistant { margin-left: 0; }
+  .kv { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand">
+      <h1>FIGS · Final 500</h1>
+      <p>390 sycophancy + 110 calibrated-validation scenarios. <span class="kbd">j</span>/<span class="kbd">k</span> to move.</p>
+    </div>
+    <div class="filters">
+      <input id="q" type="search" placeholder="Search id, scenario, transcript…" autocomplete="off">
+      <div class="seg" id="axis">
+        <button data-v="" class="on">All</button>
+        <button data-v="sycophancy">Sycophancy</button>
+        <button data-v="calibrated_validation">Calibrated val.</button>
+      </div>
+      <div class="row">
+        <select id="rule"><option value="">All rules</option></select>
+        <select id="arch"><option value="">All archetypes</option></select>
+      </div>
+      <div class="row">
+        <select id="dom"><option value="">All domains</option></select>
+        <select id="gate">
+          <option value="">Any gate</option>
+          <option value="harder">Gate: one attempt harder</option>
+          <option value="tied">Gate: attempts tied</option>
+        </select>
+      </div>
+      <div class="count"><span id="count"></span><a id="reset">reset filters</a></div>
+    </div>
+    <div class="list" id="list"></div>
+  </aside>
+  <main id="main"><div class="wrap" id="detail"></div></main>
+</div>
+<script id="samples" type="application/json">__SAMPLES_JSON__</script>
+<script>
+(function () {
+  const S = JSON.parse(document.getElementById('samples').textContent);
+  const $ = (id) => document.getElementById(id);
+  const AXIS = { sycophancy: ['Sycophancy', 'syc'], calibrated_validation: ['Calibrated validation', 'cv'] };
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const state = { q: '', axis: '', rule: '', arch: '', dom: '', gate: '', cur: null, tab: 'plan' };
+  let view = [];
+
+  S.forEach((s) => {
+    s._hay = [s.id, s.rule.rule_id, s.rule.title, s.domain, s.archetype.name, s.user_role, s.plan, s.plan_original,
+      s.turns.map((t) => t.content).join('\n')].join('\n').toLowerCase();
+  });
+
+  function fillSelect(el, pairs) {
+    pairs.forEach(([v, label]) => { const o = document.createElement('option'); o.value = v; o.textContent = label; el.appendChild(o); });
+  }
+  const uniq = (f) => { const m = new Map(); S.forEach((s) => { const [k, l] = f(s); if (!m.has(k)) m.set(k, l); }); return [...m.entries()].sort((a, b) => a[0].localeCompare(b[0], undefined, { numeric: true })); };
+  fillSelect($('rule'), uniq((s) => [s.rule.rule_id, s.rule.rule_id + ' — ' + s.rule.title]));
+  fillSelect($('arch'), uniq((s) => [(s.axis === 'sycophancy' ? 'S:' : 'V:') + s.archetype.id, (s.axis === 'sycophancy' ? 'Syc ' : 'CV ') + s.archetype.id + ' — ' + s.archetype.name]));
+  fillSelect($('dom'), uniq((s) => [s.domain, s.domain]));
+
+  function hl(text, md) {
+    let e = esc(text);
+    if (md) e = e.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+    if (!state.q) return e;
+    const q = state.q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return e.replace(new RegExp('(' + esc(q) + ')', 'gi'), '<mark>$1</mark>');
+  }
+
+  function applyFilters() {
+    const q = state.q.toLowerCase();
+    view = S.filter((s) =>
+      (!state.axis || s.axis === state.axis) &&
+      (!state.rule || s.rule.rule_id === state.rule) &&
+      (!state.arch || ((s.axis === 'sycophancy' ? 'S:' : 'V:') + s.archetype.id) === state.arch) &&
+      (!state.dom || s.domain === state.dom) &&
+      (!state.gate || (state.gate === 'tied') === s.gate.tied) &&
+      (!q || s._hay.includes(q)));
+    $('count').textContent = view.length + ' of ' + S.length + ' samples';
+    renderList();
+    if (!view.find((s) => s.id === state.cur)) select(view.length ? view[0].id : null, false);
+  }
+
+  function renderList() {
+    const L = $('list');
+    if (!view.length) { L.innerHTML = '<div class="empty">No samples match.</div>'; return; }
+    L.innerHTML = view.map((s) => {
+      const [, cls] = AXIS[s.axis];
+      const first = (s.turns[0] || {}).content || '';
+      return '<div class="item' + (s.id === state.cur ? ' on' : '') + '" data-id="' + s.id + '">' +
+        '<div class="top"><span class="id">' + s.id + '</span><span class="chip ' + cls + '">' + esc(s.rule.rule_id) + '</span>' +
+        '<span class="chip">' + esc(s.archetype.id) + '</span></div>' +
+        '<div class="snip">' + esc(first.slice(0, 220)) + '</div></div>';
+    }).join('');
+  }
+
+  function select(id, scroll) {
+    state.cur = id;
+    document.querySelectorAll('.item').forEach((el) => el.classList.toggle('on', el.dataset.id === id));
+    if (id && scroll !== false) { const el = document.querySelector('.item[data-id="' + id + '"]'); if (el) el.scrollIntoView({ block: 'nearest' }); }
+    if (id && location.hash.slice(1) !== id) history.replaceState(null, '', '#' + id);
+    renderDetail();
+    $('main').scrollTop = 0;
+  }
+
+  function step(d) {
+    const i = view.findIndex((s) => s.id === state.cur);
+    const n = view[Math.min(view.length - 1, Math.max(0, i + d))];
+    if (n) select(n.id);
+  }
+
+  function renderDetail() {
+    const s = S.find((x) => x.id === state.cur);
+    const D = $('detail');
+    if (!s) { D.innerHTML = '<div class="empty">Select a sample.</div>'; return; }
+    const [axisLabel, cls] = AXIS[s.axis];
+    const tabs = [['plan', 'Scenario plan (expanded, used in eval)'], ['orig', 'Original plan (pre-expansion)'], ['role', 'User role'], ['why', 'Design rationale']];
+    const tabBody = {
+      plan: s.plan, orig: s.plan_original, role: s.user_role,
+      why: 'ARCHETYPE FIT\n' + (s.archetype_fit || '—') + '\n\nRULE ELICITATION\n' + (s.elicitation || '—'),
+    }[state.tab];
+    D.innerHTML =
+      '<div class="head"><div><h2>' + s.id + '</h2><div class="chips">' +
+        '<span class="chip ' + cls + '">' + axisLabel + '</span>' +
+        '<span class="chip acc">' + esc(s.rule.rule_id + ' · ' + s.rule.title) + '</span>' +
+        '<span class="chip">Archetype ' + esc(s.archetype.id + ' · ' + s.archetype.name) + '</span>' +
+        '<span class="chip">' + esc(s.domain) + '</span>' +
+        (s.severity ? '<span class="chip">severity: ' + esc(s.severity) + '</span>' : '') +
+      '</div></div><div class="nav"><button id="prev" title="k">← Prev</button><button id="next" title="j">Next →</button></div></div>' +
+
+      '<section class="card"><h3>Evaluated rule</h3><div class="body">' +
+        '<div class="rule-title">' + esc(s.rule.rule_id) + ' — ' + esc(s.rule.title) + '</div>' +
+        '<div class="prose">' + esc(s.rule.description) + '</div>' +
+        '<details><summary>Example and neighbouring boundary</summary>' +
+          '<div class="sub">Example</div><div class="prose">' + esc(s.rule.example) + '</div>' +
+          '<div class="sub">Neighbouring boundary</div><div class="prose">' + esc(s.rule.neighboring_boundary) + '</div>' +
+        '</details>' +
+        (s.archetype.definition ? '<details><summary>Conversation archetype ' + esc(s.archetype.id) + ' definition</summary><div class="prose" style="margin-top:6px">' + esc(s.archetype.definition) + '</div></details>' : '') +
+      '</div></section>' +
+
+      '<section class="card"><h3>Scenario (private to the user simulator)</h3>' +
+        '<div class="tabs">' + tabs.map(([k, l]) => '<button data-tab="' + k + '" class="' + (state.tab === k ? 'on' : '') + '">' + l + '</button>').join('') + '</div>' +
+        '<div class="body prose">' + hl(tabBody, true) + '</div>' +
+      '</section>' +
+
+      '<section class="card"><h3>Texting style <span class="chip">' + esc(s.style.id) + '</span></h3><div class="body">' +
+        '<div class="prose">' + esc(s.style.description) + '</div></div></section>' +
+
+      '<section class="card"><h3>Reference transcript <span class="chip">' + s.turns.length + ' turns</span></h3><div class="body">' +
+        '<div class="note">Authoring-time reference rollout (final post-audit version). Assistant: <code>' + esc(s.models.assistant) + '</code>; user simulator: <code>' + esc(s.models.user) + '</code>. ' +
+        'At evaluation time the conversation is re-rolled live against the model under test from the scenario above — this transcript is not replayed.</div>' +
+        '<div class="turns">' + s.turns.map((t) => '<div class="turn ' + t.role + '"><div class="who">' + t.role + '</div><div class="prose">' + hl(t.content) + '</div></div>').join('') + '</div>' +
+      '</div></section>' +
+
+      '<section class="card"><h3>Provenance</h3><div class="body"><div class="kv">' +
+        '<div>Difficulty gate</div><div>DeepSeek-V4.1-Flash harder-pick: attempt a scored <code>' + s.gate.score_a + '</code>, attempt b scored <code>' + s.gate.score_b + '</code> → released attempt <code>' + s.gate.attempt + '</code>' + (s.gate.tied ? ' (tied)' : '') + '</div>' +
+        '<div>Authoring</div><div>generator / refiner / auditor: <code>' + esc(s.models.generator) + '</code></div>' +
+        '<div>Refinement / audit passes</div><div>' + s.audit.refine_iters + ' scenario-refinement · ' + s.audit.audit_iters + ' transcript-audit · terminal verdict <code>' + esc(s.audit.decision) + '</code> (diagnostic, not a filter)</div>' +
+        '<div>Scenario context</div><div>' + esc(s.context || '—') + '</div>' +
+      '</div></div></section>';
+
+    $('prev').onclick = () => step(-1);
+    $('next').onclick = () => step(1);
+    D.querySelectorAll('[data-tab]').forEach((b) => (b.onclick = () => { state.tab = b.dataset.tab; renderDetail(); }));
+  }
+
+  $('list').addEventListener('click', (e) => { const it = e.target.closest('.item'); if (it) select(it.dataset.id, false); });
+  let t; $('q').addEventListener('input', (e) => { clearTimeout(t); t = setTimeout(() => { state.q = e.target.value.trim(); applyFilters(); renderDetail(); }, 120); });
+  $('axis').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; state.axis = b.dataset.v; $('axis').querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b)); applyFilters(); });
+  [['rule', 'rule'], ['arch', 'arch'], ['dom', 'dom'], ['gate', 'gate']].forEach(([id, k]) => $(id).addEventListener('change', (e) => { state[k] = e.target.value; applyFilters(); }));
+  $('reset').onclick = () => { Object.assign(state, { q: '', axis: '', rule: '', arch: '', dom: '', gate: '' }); $('q').value = ''; ['rule', 'arch', 'dom', 'gate'].forEach((id) => ($(id).value = '')); $('axis').querySelectorAll('button').forEach((x, i) => x.classList.toggle('on', i === 0)); applyFilters(); };
+  document.addEventListener('keydown', (e) => {
+    if (e.target.matches('input, select')) return;
+    if (e.key === 'j' || e.key === 'ArrowDown') { step(1); e.preventDefault(); }
+    if (e.key === 'k' || e.key === 'ArrowUp') { step(-1); e.preventDefault(); }
+  });
+  window.addEventListener('hashchange', () => { const id = location.hash.slice(1); if (S.find((s) => s.id === id)) select(id); });
+
+  const initial = location.hash.slice(1);
+  state.cur = S.find((s) => s.id === initial) ? initial : S[0].id;
+  applyFilters();
+  select(state.cur);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+key: deepseek-v4-flash
+hf_repo: deepseek-ai/DeepSeek-V4-Flash
+tensor_parallel_size: 8
+max_model_len: 16384
+gpu_memory_utilization: 0.92
+max_num_seqs: 256
+max_num_batched_tokens: 16384
+block_size: 256
+kv_cache_dtype: fp8
+enable_expert_parallel: true
+tokenizer_mode: deepseek_v4
+tool_call_parser: deepseek_v4
+reasoning_parser: deepseek_v4
+trust_remote_code: true
+use_docker: true
+docker_image: vllm-dsv4-flash:cu130-breakable
+vllm_extra_args: ["--optimization-level", "3", "--no-enable-prefix-caching", "-cc.cudagraph_mode=FULL_DECODE_ONLY"]
+description: DeepSeek-V4-Flash MoE FP4/FP8, breakable cudagraph, CUDA compat

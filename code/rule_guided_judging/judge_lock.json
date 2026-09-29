@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "judge_model": "local-glm-5.3-flash",
+  "prompt_version": "appendix-dual-judge-v7",
+  "validator_version": "appendix-dual-judge-validator-v5",
+  "rubric_version": "calibrated-responsiveness-appendix-v5",
+  "system_prompt_sha256": "008a6e9ac962581deb69556f16832266b7756823d673c71b131b548cfa221e47",
+  "rules_sha256": "ba03ef7f84bab82e7f17b810734035e631e8d38afa52bb3a15e8bb2f6cbe027d",
+  "output_contract_sha256": "b4f8db9b36a4dfaecfd38dc46722d683bf5a4274a9d60183146bcb9050e17b9f"
+}

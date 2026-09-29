@@ -1,0 +1,1 @@
+"""Static benchmark configuration data."""

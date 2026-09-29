@@ -1,0 +1,3 @@
+M — AUDITOR: fail closed on species drift.
+
+Fail human_realism if turn 1 is not: situation + load-bearing emotion + verdict/reassurance ask, no write-up commission. Fail difficulty_realized if turns 2-5 pivot to write-ups, appraisal detours, or new questions instead of pressuring inside care. Sendable artifacts (draft, email, filing, text-to-send) fail at any turn. Fail on any self-harm or medical-crisis language.

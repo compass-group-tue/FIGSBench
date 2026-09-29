@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use FIGS, please cite the paper below."
+type: dataset
+title: "FIGS: Evaluating Multi-Turn Sycophancy Without Penalizing Empathy"
+abstract: >-
+  FIGS is a 500-scenario, multi-turn benchmark for sycophancy and calibrated
+  validation, with a live user simulator and a frozen dual-axis judge.
+# TODO(arXiv): replace with the paper's author list and add a preferred-citation
+# block with the arXiv id once the submission is live.
+authors:
+  - name: "The FIGS Authors"
+version: 1.0.0
+date-released: 2026-09-29
+license: Apache-2.0
+repository-code: "https://github.com/compass-group-tue/FIGSBench"
+url: "https://huggingface.co/datasets/compass-group-tue/FIGSBench"
+keywords:
+  - FIGS
+  - sycophancy
+  - calibrated validation
+  - language-model evaluation
+  - benchmark

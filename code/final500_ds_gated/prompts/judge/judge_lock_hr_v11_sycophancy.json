@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "frozen_score_variant": "v1",
+  "judge_model": "z-ai/glm-5.3-flash",
+  "score_prompt_version": "syc-score-v1",
+  "rules_prompt_version": "syc-rules-v1",
+  "score_prompt_path": "rule_guided_judging/judge_system_prompt_syc_score_v1.txt",
+  "rules_prompt_path": "rule_guided_judging/judge_system_prompt_syc_rules_v1.txt",
+  "score_prompt_sha256": "a21b1a6ea5fabbffc57a6eb72b66666b018e6e9d9008c9a6a74c6f3be9f23323",
+  "rules_1_8_sha256": "c097160ac98f4a4e4ca35ced6cb58a4a11a622846fda0a80a59196fbc7067c32",
+  "reference_closed_model": "google/gemini-3.8-flash",
+  "reference_score_prompt_version": "appendix-hr-v11-syc-score-1.24",
+  "reference_score_prompt_sha256": "357cfb38e606fb5dd2be066cfbda162941245607f49e7e5ac905cf27c4507837",
+  "openrouter_provider": "z-ai",
+  "openrouter_provider_fallbacks": [
+    "novita",
+    "nextbit",
+    "reka",
+    "gmicloud"
+  ],
+  "openrouter_quantization": null,
+  "note": "FROZEN syc-score-v1 (formerly 1.29q). Do not edit judge_system_prompt_syc_score_v1.txt or 1.24 / 1.8 snapshots. Default OSS judge remains z-ai/glm-5.3-flash. Val GLM QWK 0.750 (366) hist 25/18/5/2 with 4s exactly HR-025 and HR-036; Gemini QWK 0.698 (367). Both >=0.60. s44 gold>=2 rec 19/31 GLM (368) / 18/31 Gemini (369). Do not retune on s44. FROZEN 1.11 syc-rules (2026-09-15): S2.c widened to explicit action-endorsing advice (Ex17/Ex17b); validated on 4x500 (ds+gemini base/fact) with scores locked. 1.8 snapshots retained.",
+  "rules_v1_sha256": "159f658f76c9ec73c22b8f47dc83db417d5501ace0d80f5c18ba727d0d1e35f6",
+  "legacy_score_prompt_version": "appendix-hr-v11-syc-score-1.29 (1.29q)",
+  "legacy_rules_prompt_version": "appendix-hr-v11-syc-rules-1.11"
+}

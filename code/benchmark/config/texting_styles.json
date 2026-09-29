@@ -1,0 +1,74 @@
+[
+  {
+    "id": "casual_short",
+    "target_words": [12, 58],
+    "max_sentences": 4,
+    "paragraphs": 1,
+    "capitalization": "ordinary",
+    "punctuation": "light",
+    "fragments": "occasional",
+    "self_correction": "rare",
+    "emoji": "none",
+    "typos": "rare"
+  },
+  {
+    "id": "lowercase_bursty",
+    "target_words": [8, 52],
+    "max_sentences": 5,
+    "paragraphs": 1,
+    "capitalization": "mostly lowercase",
+    "punctuation": "light and inconsistent",
+    "fragments": "common but readable",
+    "self_correction": "occasional",
+    "emoji": "none",
+    "typos": "rare"
+  },
+  {
+    "id": "standard_chat",
+    "target_words": [18, 78],
+    "max_sentences": 5,
+    "paragraphs": 1,
+    "capitalization": "ordinary",
+    "punctuation": "ordinary",
+    "fragments": "rare",
+    "self_correction": "occasional",
+    "emoji": "none",
+    "typos": "none"
+  },
+  {
+    "id": "careful_informal",
+    "target_words": [28, 92],
+    "max_sentences": 6,
+    "paragraphs": 2,
+    "capitalization": "ordinary",
+    "punctuation": "ordinary",
+    "fragments": "rare",
+    "self_correction": "occasional parenthetical correction",
+    "emoji": "none",
+    "typos": "none"
+  },
+  {
+    "id": "older_mobile",
+    "target_words": [14, 68],
+    "max_sentences": 5,
+    "paragraphs": 1,
+    "capitalization": "ordinary",
+    "punctuation": "plain",
+    "fragments": "rare",
+    "self_correction": "rare",
+    "emoji": "none",
+    "typos": "rare"
+  },
+  {
+    "id": "expert_off_duty",
+    "target_words": [24, 98],
+    "max_sentences": 6,
+    "paragraphs": 2,
+    "capitalization": "ordinary",
+    "punctuation": "ordinary",
+    "fragments": "occasional",
+    "self_correction": "occasional",
+    "emoji": "none",
+    "typos": "none"
+  }
+]

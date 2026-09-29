@@ -1,0 +1,123 @@
+{
+  "schema_version": "cr-chunk-manifest-v4",
+  "catalog_version": "crms-1.0-compositions-v5",
+  "spec_version": "crms-1.0",
+  "source_spec": "docs/calibrated_responsiveness_model_spec.md",
+  "source_spec_sha256": "e779f588a116862da8b40e217e513c92874109773f13b29141e455b6d042582b",
+  "generation": {
+    "screen_model": "deepseek/deepseek-v4-flash",
+    "screen_prompt_version": "composability-screen-v12",
+    "screen_prompt_sha256": "6e4de2dbb1f2203850c85fdfe33b8d666d2593b537ff7f533d3874249613d319",
+    "adversarial_model": "deepseek/deepseek-v4-flash",
+    "adversarial_prompt_version": "composability-adversary-v12",
+    "adversarial_prompt_sha256": "99b565ea5e4a6dc7d8be232c7a0cd39af4d84e28c02f53bafeb7cd4a663757db",
+    "workers": 20,
+    "pair_screen_batch_size": 2,
+    "pair_review_batch_size": 2,
+    "triple_batch_size": 1
+  },
+  "final_review": {
+    "reviewers": [
+      "normative_fidelity",
+      "semantic_distinctness"
+    ],
+    "policy": "Retain a model-accepted rendering only when independent audits find no material trigger, isolation, self-contained-evidence, or semantic-distinctness defect. Defective renderings are excluded without relabeling the abstract combination uncomposable.",
+    "source_repairs": [
+      "S2.c+S2.d+V1.a",
+      "S2.c+V1.a+V2.b",
+      "V1.b+V2.a"
+    ],
+    "repair_input_sha256": {
+      "s2c_s2d_v1a.candidate.json": "048e90afed69f5096ebd466d190a7bf9a1048fcc558f5013483a24bf4fb38824",
+      "s2c_s2d_v1a.review.json": "974ca7f164426ab2854e154957aba4f324743be7fc1eae4929f44a537473cd38",
+      "s2c_v1a_v2b.candidate.json": "5dc407e42b13e61b97476fe6226dcfc7770d070de59b5307dad6997e546256c4",
+      "s2c_v1a_v2b.review.json": "6cea1d6a0bce42f2c89a9876546f397c4f0d25709c34a6f8087fa781d5a6ecad",
+      "v1b_v2a.candidate.json": "99e2a3120d229feccb6dee8f17999a3f8fa7a1ef050f1585bfa870f8330f1753",
+      "v1b_v2a.review.json": "506bbc50582948c18feee9d659b7012edd17a831dd51a9b426004fa3d16546c9"
+    }
+  },
+  "deterministic_order": "Canonical base-rule order, followed by retained compositions in canonical pair-then-triple order.",
+  "candidate_counts": {
+    "pairs": 91,
+    "triples": 364,
+    "total": 455
+  },
+  "raw_screen_counts": {
+    "2": {
+      "redundant": 5,
+      "sequential": 1,
+      "simultaneous": 84,
+      "uncomposable": 1
+    },
+    "3": {
+      "redundant": 24,
+      "sequential": 43,
+      "simultaneous": 271,
+      "uncomposable": 26
+    }
+  },
+  "raw_adversarial_counts": {
+    "pass": 179,
+    "reject": 220
+  },
+  "final_review_counts": {
+    "accept_repair": 3,
+    "not_applicable": 275,
+    "pass": 116,
+    "reject": 61
+  },
+  "accepted_counts": {
+    "pairs": 38,
+    "triples": 81,
+    "total": 119
+  },
+  "chunk_counts": {
+    "base_rules": 14,
+    "compositions": 119,
+    "total": 133
+  },
+  "label_counts": {
+    "base_rules": {
+      "sycophancy": 9,
+      "calibrated_validation": 5,
+      "both": 0
+    },
+    "compositions": {
+      "sycophancy": 23,
+      "calibrated_validation": 8,
+      "both": 88
+    },
+    "total": {
+      "sycophancy": 32,
+      "calibrated_validation": 13,
+      "both": 88
+    }
+  },
+  "acceptance_policy": "A training chunk must pass the DeepSeek screen and adversarial review plus the final fidelity/distinctness audit, or be a source-backed positive control whose repaired candidate passed the same adversarial review contract.",
+  "files": {
+    "chunks.jsonl": {
+      "lines": 133,
+      "sha256": "0136217e5e8c56233324b33ee1bd72f2fe72620e55cea891aff8dde828911945"
+    },
+    "composition_decisions.jsonl": {
+      "lines": 455,
+      "sha256": "4947097b3994b382a7dcf4d38a2dd93af296ebcd2288856febe4b685b1f264c4"
+    },
+    "composition_decisions.raw.jsonl": {
+      "lines": 455,
+      "sha256": "d3a7671b630e67ae87da6451444d841bc4d23bd6ad57f0410a68f70c045e24d4"
+    },
+    "chunk.schema.json": {
+      "sha256": "85bdc3bd9223fc03ca6d676498a3303ad8e6e5de36e551b048f0f9ca75f81ad3"
+    },
+    "composition_decision.schema.json": {
+      "sha256": "a3e33b22cf701578af21512c9390b6c80abb500610bfd47ec23e16746dfb17ef"
+    },
+    "build_catalog.py": {
+      "sha256": "b1eac9659769ed77460f348e8f0e10248febd765bbab7511a79444d42a6ab3f3"
+    },
+    "finalize_catalog.py": {
+      "sha256": "ab304a74ec8f90db993656afaccbd9582b798caa46ece548840456c2fe9b99d8"
+    }
+  }
+}
