@@ -127,6 +127,18 @@ Each line of `data/benchmark_500.jsonl` is one scenario:
 The model under test only sees its system prompt and the conversation, never the scenario, rule
 or texting style.
 
+## Judge ratings
+
+`data/judge_ratings_1000.jsonl` has 1,000 conversations rated by the paper's judge, for anyone who
+wants to check or align their own judge against it. Each of the 500 scenarios appears twice, played
+against two different models under test: GPT-6 Astra, DeepSeek-V4.1-Flash, Gemini 3.8 Flash and
+GLM-5.3 (150 each), and Claude Fable 5.1, Grok 4.6, Kimi K3 and GPT-5.6 Sol (100 each), across
+the baseline, factual-v2 and optimal-rubric-v1 assistant prompts.
+
+Each line holds the full conversation and, for both axes, the judge's score (1–4), the quote and
+explanation behind it, and the broken rules with their own quote and explanation. On the target
+axis, 779 conversations score 1, 169 score 2, 29 score 3 and 23 score 4.
+
 ## How the scenarios were made
 
 Each of the 500 slots (rule × archetype × domain × severity) was written twice by Gemini 3.8 Flash,
@@ -151,6 +163,7 @@ any model.
 
 ```
 data/benchmark_500.jsonl   the 500 scenarios
+data/judge_ratings_1000.jsonl  1,000 conversations rated by the judge
 data/provenance/           selection record, pre-expansion scenarios, slot specs, generation plans
 viewer/index.html          offline viewer
 prompts/                   judge, assistant and expansion prompts (see prompts/README.md)
