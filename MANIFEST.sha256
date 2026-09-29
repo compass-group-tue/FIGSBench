@@ -229,14 +229,14 @@ a01b0ba7e8196ccc84b3f4aa58d43a6ee6948f73c4fb782a987a60101d534fd1  ./data/provena
 8499fd6f51840bd1f934b5d79a8a142ed74d70e81c0bfae2ad0039a564161e62  ./docker/deepseek-v4-flash/Dockerfile
 8c1ea3ea5586f824f4b4a8ae5a6d0dfee9ab31cf6b434682fa251eef272dd41d  ./docker/deepseek-v4-flash/inference-library/docker/dsv4-flash/apply_patches.py
 9b810535e34ae724bfc4489f75a6eac715d92d90c99ba2c7682e7a5e5d28d3e3  ./docker/deepseek-v4-flash/inference-library/docker/dsv4-flash/breakable_cudagraph.py
-edc3e47955619e137858fb3ad525712700a6f75f6b819621df7cd79ece994af1  ./docker/deepseek-v4-flash/serve.sh
+b5a872b198912f7770761a08bb980646ff34c9843ba1d10ad4ddf6bcff3dd368  ./docker/deepseek-v4-flash/serve.sh
 9d8e40aae1f7062188f29daca4a90491c22e9837595ef7d271bc764edceab86d  ./docker/glm-5.3-flash-judge/Dockerfile
-58236d203b3286f55621c595467ad4cc8359161844f55f9dbbf9442b21ae8486  ./docker/glm-5.3-flash-judge/serve.sh
-4213644b67e7c5ff7dbaa9ba2d5a4d160d8e9f43023f1c83f82a0f96d58d70c9  ./docker/README.md
+515b192d64f465b62b89fdac06f7d412551861727af0bdc182fb789a9fda9ed5  ./docker/glm-5.3-flash-judge/serve.sh
+3788bffc67bbbbd12e6669486e8cfea2d748e0f1334aa14851e82be81df6b7dc  ./docker/README.md
 73dc8cae5ba0b276cf735c2b3e8b3359a030ad2d8d42edff31f2ec74f56da36a  ./docker/serve_presets/deepseek-v4-flash.yaml
 379e1a4fa250c3a6bde64385da79d1f2424398f3296bc070816cdc56060b7172  ./docker/serve_presets/glm-5.3-flash.yaml
 1d0de87dfe78eebe11b67a8d6eebebd5f8f148fb443908ea70f345326450e9b5  ./.github/workflows/ci.yml
-d18767934dad27671ad3235040d424d8b6c80ea0a273d259069173045969d7fd  ./.gitignore
+f42a8b18a36e98fb1e52227486ed571e49a7f5ac55026cab528237d6853fa9a0  ./.gitignore
 78ef1dd10d6872a41363cbe183c21b8c04b94ec3aad8881bf3717dda9ad8d45d  ./LICENSE
 c929a6dfbf1db18a0e4314fc3ac1aebccc78755d6f9048aa95885b736cbdedc4  ./prompts/assistant/baseline.txt
 8095c1db7e7bac7696138cd7d2dd489d75770d3ac4457cb18fd5d9e994241b7f  ./prompts/assistant/extreme_cold.txt
@@ -281,7 +281,7 @@ a21b1a6ea5fabbffc57a6eb72b66666b018e6e9d9008c9a6a74c6f3be9f23323  ./prompts/judg
 39d41d39a41b827f0f22b3bbc33a509e4a93f95a5aad6bcfe8064752f7acaecf  ./prompts/README.md
 35cdc748d720790734877f8c1387faa7f5f00be841fe616088e1f9371197f627  ./prompts/SHA256SUMS
 e7d65cf1dd7cfe536a7cdbc2a4fd02fb61268cf99ac379e799ae330266b753fd  ./pyproject.toml
-c798f4e055a917cbcf1abe35c5ee057565f1301f7fee58acca2cdef870a8e238  ./README.md
+0b9daf3d59ab928dc871ec039840f2718c7399ee5cef9937a7e41b1a1d4a058b  ./README.md
 ae8440c41d0fdb401d6c16541674dfba234b4a2d65f439883ed42cfb8854b8bb  ./SECURITY.md
 ddaffc4d74dc28345cc655c9327f3c93acbe36534413f1d3a3d9b1dc84050f86  ./tests/test_authoring_cli.py
 302dd28ab6109355755c5d9089b8c11153e01f51d7ca5a72576be9bcbe2deb39  ./tests/test_data_schema.py

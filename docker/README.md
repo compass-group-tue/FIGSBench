@@ -1,35 +1,27 @@
 # Self-hosted models: GLM-5.3-Flash judge and DeepSeek-V4-Flash user simulator
 
-Two open-weight models are served locally with vLLM, each on one 8×H100 node, behind an
-OpenAI-compatible `/v1` endpoint. The exact images used for the paper are published as GitHub
-packages of this repository, so serving needs no other repository or registry. Weights are never
-baked in and are bind-mounted at runtime.
+The judge and the user simulator are open-weight models served with vLLM, each on one 8×H100
+node, behind an OpenAI-compatible `/v1` endpoint. The images that ran for the paper are on
+Hugging Face at [compass-group-tue/FIGSBench-images](https://huggingface.co/compass-group-tue/FIGSBench-images).
+Weights are not included in the images; they are mounted at runtime.
 
-| Role | Image (pinned by digest in `serve.sh`) | Image id | Originally tagged |
+| Role | File | Loads as | Model |
 |---|---|---|---|
-| **Judge** (`glm-5.3-flash-judge/`) | `ghcr.io/compass-group-tue/figsbench-judge:glm-5.3-flash`<br>`@sha256:9fc5cb280ecd19cf57d4d2feb42ffad35930193bf4852e8d53d1a3209c757a7c` | `sha256:6a5c3471f9199628a9da84d224599a84267bd7c53e636661d3c59e620d437e03` | `toolkit/inference-glm53:12.8` |
-| **User simulator** (`deepseek-v4-flash/`) | `ghcr.io/compass-group-tue/figsbench-user-simulator:deepseek-v4-flash`<br>`@sha256:5afc74a0978b45cee8c497aee0ab74679bf22ea9898b59428e60431f996c3e4d` | `sha256:c89bba31fc32572db8cb1ae742bc0a04b1d3d0a33e516bf5cfa34d8929b2422a` | `vllm-dsv4-flash:cu130-breakable` |
+| Judge (`glm-5.3-flash-judge/`) | `figsbench-judge.tar` (20 GB) | `toolkit/inference-glm53:12.8` | `zai-org/GLM-5.3-Flash` @ `04c4e9e9` |
+| User simulator (`deepseek-v4-flash/`) | `figsbench-user-simulator.tar` (23 GB) | `vllm-dsv4-flash:cu130-breakable` | `deepseek-ai/DeepSeek-V4-Flash` @ `60d8d707` |
 
-These are the `legacy` images (inference-library presets `glm-5.3-flash-legacy` and
-`deepseek-v4-flash-legacy`) that served every run in the paper: authoring, the difficulty gate,
-scenario expansion and all model evaluations. The image id is the digest of the image config, and
-it is identical to the id of the image that ran for the paper. The registry copies were pushed from `docker save` exports of those images with
-their layers gzip-compressed, which changes the manifest digest but not the image id (download is
-about 9.5 GB for each image).
+Use the original DeepSeek-V4-Flash release, not `DeepSeek-V4-Flash-0731`.
 
-| Role | Model | Client alias in code | Endpoint env var | Directory |
-|---|---|---|---|---|
-| **Judge.** All four hr-v11 stages, used for every reported score. Also the scenario-expansion rewriter. | `zai-org/GLM-5.3-Flash` (FP8) @ `04c4e9e9` | `local-glm-5.3-flash` | `LOCAL_GLM_BASE_URL`, `LOCAL_GLM_MODEL` | `glm-5.3-flash-judge/` |
-| **User simulator.** Plays the user in authoring and in every evaluation rollout. | `deepseek-ai/DeepSeek-V4-Flash` @ `60d8d707` (the 0423 release, **not** `-0731`) | `local-deepseek-v4-flash` | `LOCAL_USER_BASE_URL`, `LOCAL_USER_MODEL` | `deepseek-v4-flash/` |
+In the code, the judge is `local-glm-5.3-flash` (endpoint `LOCAL_GLM_BASE_URL`) and the user
+simulator is `local-deepseek-v4-flash` (endpoint `LOCAL_USER_BASE_URL`). Any other model name goes
+to OpenRouter.
 
-The routing lives in `code/benchmark/pipeline/client.py` (`LOCAL_MODEL_ROUTES`). Any model name
-starting with `local-` is sent to the endpoint named by the env var; everything else goes to OpenRouter.
-
-## Pull
+## Get the images
 
 ```bash
-docker pull ghcr.io/compass-group-tue/figsbench-judge@sha256:9fc5cb280ecd19cf57d4d2feb42ffad35930193bf4852e8d53d1a3209c757a7c
-docker pull ghcr.io/compass-group-tue/figsbench-user-simulator@sha256:5afc74a0978b45cee8c497aee0ab74679bf22ea9898b59428e60431f996c3e4d
+hf download compass-group-tue/FIGSBench-images --local-dir ./images
+docker load -i images/figsbench-judge.tar
+docker load -i images/figsbench-user-simulator.tar
 ```
 
 ## Why two images

@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # Serve the judge (GLM-5.3-Flash, FP8) on one 8xH100 node as an OpenAI-compatible endpoint.
-# Uses the exact image that ran for the paper, published as ghcr.io/compass-group-tue/figsbench-judge:glm-5.3-flash
-# (image id 6a5c3471; originally tagged toolkit/inference-glm53:12.8). The default is pinned by
-# digest, so `docker pull ghcr.io/compass-group-tue/figsbench-judge:glm-5.3-flash` and this script get the same bytes.
+# Uses the image that ran for the paper (toolkit/inference-glm53:12.8, image id 6a5c3471). Get it with
+#   hf download compass-group-tue/FIGSBench-images figsbench-judge.tar --local-dir .
+#   docker load -i figsbench-judge.tar
 # vLLM args match inference-library preset glm-5.3-flash-legacy (max_model_len 98304,
 # prefix caching on). Usage: WEIGHTS=/path/to/zai-org/GLM-5.3-Flash PORT=8000 bash serve.sh
 set -euo pipefail
 : "${WEIGHTS:?set WEIGHTS to the local GLM-5.3-Flash checkpoint directory}"
 PORT="${PORT:-8000}"
-IMAGE="${IMAGE:-ghcr.io/compass-group-tue/figsbench-judge@sha256:9fc5cb280ecd19cf57d4d2feb42ffad35930193bf4852e8d53d1a3209c757a7c}"
+IMAGE="${IMAGE:-toolkit/inference-glm53:12.8}"
 MAX_MODEL_LEN="${MAX_MODEL_LEN:-98304}"
 MAX_NUM_SEQS="${MAX_NUM_SEQS:-64}"
 docker run -d --name "glm53-judge-${PORT}" --gpus all --ipc=host -p "${PORT}:8000" \

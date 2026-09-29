@@ -13,8 +13,7 @@ talks with the model under test for five turns. A judge (GLM-5.3-Flash) then sco
 conversation on both axes.
 
 * Dataset: [huggingface.co/datasets/compass-group-tue/FIGSBench](https://huggingface.co/datasets/compass-group-tue/FIGSBench)
-* Serving images: `ghcr.io/compass-group-tue/figsbench-judge` and
-  `ghcr.io/compass-group-tue/figsbench-user-simulator`
+* Judge and user-simulator images: [huggingface.co/compass-group-tue/FIGSBench-images](https://huggingface.co/compass-group-tue/FIGSBench-images)
 * Browse all 500 samples offline: open `viewer/index.html` in a browser
 
 ## Install
@@ -34,9 +33,10 @@ cp code/.env.example code/.env      # set OPENROUTER_API_KEY and, for self-hosti
 This needs two 8×H100 nodes, one per server.
 
 ```bash
-# 1. Pull the serving images
-docker pull ghcr.io/compass-group-tue/figsbench-judge@sha256:9fc5cb280ecd19cf57d4d2feb42ffad35930193bf4852e8d53d1a3209c757a7c
-docker pull ghcr.io/compass-group-tue/figsbench-user-simulator@sha256:5afc74a0978b45cee8c497aee0ab74679bf22ea9898b59428e60431f996c3e4d
+# 1. Download and load the serving images (20 GB and 23 GB)
+hf download compass-group-tue/FIGSBench-images --local-dir ./images
+docker load -i images/figsbench-judge.tar
+docker load -i images/figsbench-user-simulator.tar
 
 # 2. Download the weights (use the original DeepSeek-V4-Flash release, not -0731)
 hf download zai-org/GLM-5.3-Flash         --revision 04c4e9e95c5da8862dced7e5056455116f83a7e0 --local-dir /weights/GLM-5.3-Flash
