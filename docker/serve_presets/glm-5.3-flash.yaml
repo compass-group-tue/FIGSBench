@@ -1,5 +1,4 @@
-# GLM-5.3-Flash preset — matches inference-library glm-5.3-flash-legacy, the exact
-# judge server used for this release (image toolkit/inference-glm53:12.8, id 6a5c3471).
+# vLLM settings of the GLM-5.3-Flash judge server used for the paper.
 # H100 single-node FP8 weights, BF16 KV (Hopper does not support FP8 KV for this model per vLLM recipe).
 tensor_parallel_size: 8
 max_model_len: 98304
@@ -12,5 +11,5 @@ tool_call_parser: glm47
 reasoning_parser: glm45
 trust_remote_code: true
 use_docker: true
-docker_image: toolkit/inference-glm53:12.8
+docker_image: figsbench-judge:glm-5.3-flash
 vllm_extra_args: ["--enable-prefix-caching", "--served-model-name", "zai-org/GLM-5.3-Flash"]

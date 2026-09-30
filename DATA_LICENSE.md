@@ -1,7 +1,7 @@
 # Data and prompt license
 
 Except for the exclusions below, the project-authored portions of
-`data/benchmark_500.jsonl`, `data/provenance/`, and `prompts/` are licensed
+`data/` and `src/figsbench/prompts/` are licensed
 under the **Creative Commons Attribution 4.0 International license
 (CC BY 4.0)**. The license text is available at
 <https://creativecommons.org/licenses/by/4.0/legalcode>.
@@ -19,8 +19,8 @@ A suitable short attribution is:
 This grant applies only to material for which the project authors own the
 necessary rights. It does **not** license:
 
-- third-party source or seed text, including
-  `code/source_corpus/data/training_seeds/**/training_seeds.jsonl`;
+- third-party source or seed text (the seed corpus used for authoring is not
+  included in this release);
 - model-generated outputs, including reference transcripts, generation
   histories, audits, and generated scenario text to the extent rights do not
   belong to the project authors;

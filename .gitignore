@@ -1,11 +1,7 @@
 .env
 __pycache__/
 *.pyc
+*.egg-info/
 /runs/
-code/archetype_guided_benchmark/data/runs/
-code/rule_guided_judging/data/
-# Historical third-party inspiration corpus is not redistributed. Never re-commit it;
-# supply your own via --seed-corpus.
-code/source_corpus/data/training_seeds/*/training_seeds.jsonl
-# Container tarballs (~43 GB) are published on Hugging Face instead (docker/README.md).
-docker/*/*.tar
+# Docker image tarballs (~43 GB) are on Hugging Face (see docker/README.md).
+*.tar

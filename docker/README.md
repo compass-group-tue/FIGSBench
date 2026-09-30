@@ -7,8 +7,8 @@ Weights are not included in the images; they are mounted at runtime.
 
 | Role | File | Loads as | Model |
 |---|---|---|---|
-| Judge (`glm-5.3-flash-judge/`) | `figsbench-judge.tar` (20 GB) | `toolkit/inference-glm53:12.8` | `zai-org/GLM-5.3-Flash` @ `04c4e9e9` |
-| User simulator (`deepseek-v4-flash/`) | `figsbench-user-simulator.tar` (23 GB) | `vllm-dsv4-flash:cu130-breakable` | `deepseek-ai/DeepSeek-V4-Flash` @ `60d8d707` |
+| Judge (`glm-5.3-flash-judge/`) | `figsbench-judge.tar` (20 GB) | `figsbench-judge:glm-5.3-flash` | `zai-org/GLM-5.3-Flash` @ `04c4e9e9` |
+| User simulator (`deepseek-v4-flash/`) | `figsbench-user-simulator.tar` (23 GB) | `figsbench-user-simulator:deepseek-v4-flash` | `deepseek-ai/DeepSeek-V4-Flash` @ `60d8d707` |
 
 Use the original DeepSeek-V4-Flash release, not `DeepSeek-V4-Flash-0731`.
 
@@ -38,27 +38,24 @@ model's stack would be a configuration the paper never measured, so the release 
 | NCCL | 2.30.7 | 2.28.9 |
 | CUDA | 13.0.1 | 13.0.1 |
 
-## Build (reproducible path)
+## Build from the recipes
 
 ```bash
-# GLM-5.3-Flash judge (recipe byte-identical to the toolkit file that built the published image)
-docker build -t toolkit/inference-glm53:12.8 -f glm-5.3-flash-judge/Dockerfile glm-5.3-flash-judge
-
-# DeepSeek-V4-Flash: the build context must be deepseek-v4-flash/ because the Dockerfile COPYs
-# inference-library/docker/dsv4-flash/{apply_patches.py,breakable_cudagraph.py}
-docker build -t vllm-dsv4-flash:cu130-breakable -f deepseek-v4-flash/Dockerfile deepseek-v4-flash
+docker build -t figsbench-judge:glm-5.3-flash glm-5.3-flash-judge
+docker build -t figsbench-user-simulator:deepseek-v4-flash deepseek-v4-flash
 ```
 
 * `glm-5.3-flash-judge/Dockerfile` starts from `vllm/vllm-openai:glm53-flash`. It adds only CUDA
   forward-compat libraries and environment settings.
-* `deepseek-v4-flash/Dockerfile` is the legacy `dsv4-flash-legacy` recipe that built the published image:
-  it starts from `vllm/vllm-openai:deepseekv4-cu130` and applies `apply_patches.py`, which
+* `deepseek-v4-flash/Dockerfile` starts from `vllm/vllm-openai:deepseekv4-cu130` and applies `apply_patches.py`, which
   installs a breakable CUDA-graph wrapper for `DeepseekV4ForCausalLM` so the model runs on
-  hosts whose driver predates the image's CUDA 13.0. The build finishes with an import check.
+  hosts whose driver predates the image's CUDA 13.0 (the scripts are in `deepseek-v4-flash/patches/`).
+  The build finishes with an import check.
 
 Rebuilds pull the upstream `vllm/vllm-openai` base tags, which may have moved since the paper's
 runs. For comparable numbers, use the published images above; the recipes document how they were
-made.
+made. (The published judge image also has different label text and one unused environment
+variable; neither affects serving.)
 
 ## Serve
 
@@ -70,9 +67,8 @@ export LOCAL_GLM_BASE_URL=http://<judge-host>:8000/v1
 export LOCAL_USER_BASE_URL=http://<user-host>:8001/v1
 ```
 
-The vLLM arguments in each `serve.sh` match the exact servers used for this release
-(`serve_presets/*.yaml`). The `docker run` flags (`--gpus all --ipc=host`, weights mounted
-at `/model`) match the toolkit launcher. Key settings:
+The vLLM arguments in each `serve.sh` are the ones the paper's servers ran with (also listed in
+`serve_presets/*.yaml`). Key settings:
 
 * **GLM-5.3-Flash:** TP 8 with expert parallelism, `max_model_len 98304`, `max_num_seqs 64`,
   `max_num_batched_tokens 32768`, KV cache `auto` (BF16 on Hopper), `--enable-prefix-caching`,
@@ -84,13 +80,12 @@ at `/model`) match the toolkit launcher. Key settings:
 
 ## Judge request settings
 
-These are set by `code/rule_guided_judging` and `code/benchmark/pipeline/client.py`, not by the
-server:
+These are set by the client code (`src/figsbench/judge/stages.py`), not by the server:
 
 * Set `JUDGE_MAX_TOKENS=64000`. Hard samples need more than 32k tokens of reasoning, and smaller
   budgets can return empty content.
 * Judge timeout is 900 s per request.
 * The OpenRouter judge (`--judge api`) defaults to `google/gemini-3.8-flash`; use
   `--judge-model z-ai/glm-5.3-flash` for GLM through OpenRouter. All reported judgments used the
-  local endpoint (`judge_model: local-glm-5.3-flash` in every result file), and only that judge
-  gives `paper_judge: true`.
+  local endpoint (`judge_model: local-glm-5.3-flash` in every result file). Results from any
+  other judge are labelled `paper_judge: false`.

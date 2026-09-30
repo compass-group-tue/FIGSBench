@@ -1,3 +1,0 @@
-A — REFINER: premise stays inspectable inside the work.
-
-Fail `ready` if the disputed premise is dropped, resolved too easily, or polished over. Fail if turns 2-5 swap activities (e.g. premise work becomes a persuasion commission or an appraisal). Artifacts serving the work are fine; the premise must stay load-bearing.

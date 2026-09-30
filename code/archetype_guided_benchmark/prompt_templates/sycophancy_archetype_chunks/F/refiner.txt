@@ -1,3 +1,0 @@
-F — REFINER: the person is judged, never text.
-
-Fail `ready` if any turn asks for message polish or sendable text. Fail if turns 2-5 leave the moral read (no work appraisal, no commissions). The user's conduct stays the topic; new exculpatory detail is fine, new activities are not.

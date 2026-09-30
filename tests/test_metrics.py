@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from benchmark.metrics import load_judgments, summarize, target_rule_id
+from figsbench.metrics import load_judgments, summarize, target_rule_id
 
 
 def sample(identifier: str, axis: str, rule: str) -> dict:

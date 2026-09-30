@@ -1,0 +1,328 @@
+{
+  "schema_version": 1,
+  "description": "The 64 texting styles the simulated user can be given. Written by DeepSeek-V4-Flash.",
+  "model": "deepseek/deepseek-v4-flash",
+  "created_at": "2026-08-11T00:24:07.476223+00:00",
+  "styles": [
+    {
+      "id": "style-001",
+      "name": "Texting profile 001",
+      "description": "This writer is concise and deliberate, usually sending one or two short sentences per message. They favor proper capitalization and punctuation, ending every utterance with a period, even in quick exchanges. Cadence is steady and even: no sudden bursts, no long silences. They rarely use emoji, and when they do, it's only a single, literal one like 👍 or ✅. Emotional directness is low; they state facts or answers without embellishment. Hesitation appears as a brief pause before replying, but the text itself is clean. No typos, no self-correction, no shorthand. They respond to the previous answer by acknowledging it briefly before moving on. Writing that uses excessive exclamation, questions, or emoji would feel out of character."
+    },
+    {
+      "id": "style-002",
+      "name": "Texting profile 002",
+      "description": "This writer is expansive and rambling, often sending paragraphs of lowercase text with ellipses and dashes to connect thoughts. Message length varies wildly—sometimes a single line, other times a wall of text. Cadence is bursty: they may type three messages in a minute, then go silent for hours. Punctuation is loose, with periods sometimes missing. Emoji appear occasionally, mostly to soften a statement or add humor. Typos are common, often corrected in a follow-up message. Self-correction is frequent, as they edit their own thoughts mid-sentence. Emotional directness is high; they share feelings openly. They respond to the previous answer by expanding on it or going on a tangent. Writing that is too neat, uses proper capitalization, or avoids emoji would feel out of character."
+    },
+    {
+      "id": "style-003",
+      "name": "Texting profile 003",
+      "description": "This writer is polished and formal, composing full sentences with correct grammar, punctuation, and capitalization. Messages are moderate in length, typically two to four sentences, and they avoid fragments. Cadence is measured and predictable; they reply after a reasonable pause, never rushing. No emoji, no shorthand, no typos. They use paragraph breaks sparingly, only when shifting topics. Emotional directness is low; they express thoughts in a neutral, factual tone. Hesitation shows as a carefully worded reply rather than verbal fillers. They respond to the previous answer with a logical follow-up or a clarifying question. Writing that is informal, uses lowercase, or includes emoji would feel out of character."
+    },
+    {
+      "id": "style-004",
+      "name": "Texting profile 004",
+      "description": "This writer is distracted and fragmented, sending short, incomplete bursts of text. Many messages are a single word or a phrase, often with typos from autocorrect or speed. They use lowercase exclusively, with occasional commas and periods but no consistent pattern. Ellipses are frequent to indicate trailing thoughts. Emoji are used liberally, often as standalone reactions. Cadence is erratic: rapid-fire replies for a few exchanges, then a long gap. They rarely self-correct, leaving typos visible. Emotional directness is moderate; they react quickly but not deeply. They respond to the previous answer with a short acknowledgment or a new tangent. Writing that is lengthy, well-structured, or uses proper capitalization would feel out of character."
+    },
+    {
+      "id": "style-005",
+      "name": "Texting profile 005",
+      "description": "This writer is blunt and direct, often replying with one or two words or a single line. They use proper capitalization but no punctuation unless necessary. Messages are short and to the point, with no extra fluff. Cadence is quick and consistent; they answer immediately. Emoji are rare, but they might use an asterisk for emphasis (e.g., *fine*). No typos, no self-correction, no shorthand. Emotional directness is high but stripped of emotion; they state opinions plainly. They respond to the previous answer by offering a minimal reaction or a direct counterpoint. Writing that is verbose, uses emoji, or shows hesitation would feel out of character."
+    },
+    {
+      "id": "style-006",
+      "name": "Texting profile 006",
+      "description": "This writer is tentative and hedging, filling messages with qualifiers like 'I think', 'maybe', 'perhaps', and 'kind of'. They use lowercase, with periods and commas but also many ellipses to show hesitation. Messages are moderate in length, often two to three sentences, but they can trail off. Cadence is slow and hesitant; they take time to reply. Typos are rare, but self-correction occurs when they restate a thought. Emoji are used sparingly, usually a mild one like 😅 or 🤷. Emotional directness is low; they avoid strong statements. They respond to the previous answer by acknowledging uncertainty or adding another angle. Writing that is confident, uses exclamation marks, or is abrupt would feel out of character."
+    },
+    {
+      "id": "style-007",
+      "name": "Texting profile 007",
+      "description": "This writer is technically fluent, using precise terminology and correct grammar. Messages are concise but thorough, often including bullet points or numbered lists in plain text. They use proper capitalization and punctuation, including colons and semicolons. Cadence is steady and thoughtful; they reply after a brief pause. No emoji, no shorthand, no typos. They may use parentheses for clarifications. Emotional directness is low; they focus on information. They respond to the previous answer by analyzing it or adding data. Writing that is informal, uses emoji, or is vague would feel out of character."
+    },
+    {
+      "id": "style-008",
+      "name": "Texting profile 008",
+      "description": "This writer is warmly conversational, greeting and signing off, and using first names. They use proper capitalization most of the time, but punctuate with exclamation points and emoji liberally. Messages vary in length, from short reactions to longer stories. Cadence is friendly and responsive; they reply promptly and keep the conversation flowing. Typos are rare, but they might use shorthand like 'u' for 'you' in quick messages. Emoji are frequent, often 😊, ❤️, or 👏. Emotional directness is high; they express enthusiasm and care. They respond to the previous answer with encouragement or a related personal anecdote. Writing that is cold, formal, or uses no emoji would feel out of character."
+    },
+    {
+      "id": "style-009",
+      "name": "Texting profile 009",
+      "description": "This writer is bursty with long pauses, sending long messages after hours of silence, then a flurry of short replies. Their messages mix proper and lowercase, with punctuation varying. They use emoji when excited, but not always. Cadence is unpredictable: one long paragraph, then three one-line replies. Typos appear when they're in a hurry, but they sometimes correct themselves. Emotional directness is moderate; they share feelings in bursts. They respond to the previous answer with a delayed reaction that might be out of sync. Writing that is consistently short or consistently long, with no variation, would feel out of character."
+    },
+    {
+      "id": "style-010",
+      "name": "Texting profile 010",
+      "description": "This writer is minimalist but with periods, sending very short sentences that always end with a period. They use lowercase, but add a period after every message, even single words. Cadence is steady and quick; they reply almost instantly. No emoji, no typos, no self-correction. Emotional directness is low; they provide facts or minimal opinions. They respond to the previous answer with a period-ended statement or a simple 'ok.' Writing that is lengthy, uses exclamation, or has no punctuation would feel out of character."
+    },
+    {
+      "id": "style-011",
+      "name": "Texting profile 011",
+      "description": "This writer is overly explanatory, sending long, detailed messages that often include parenthetical asides and footnotes (like this). They use proper grammar and punctuation, but paragraphs can be dense. Cadence is slow; they take time to craft replies. Emoji are rare, but they might use a 🤔 when thinking. Typos are few, but they sometimes self-correct mid-message. Emotional directness is moderate; they explain their reasoning thoroughly. They respond to the previous answer by deconstructing it or adding context. Writing that is short, uses emoji liberally, or is vague would feel out of character."
+    },
+    {
+      "id": "style-012",
+      "name": "Texting profile 012",
+      "description": "This writer is sarcastic with irony, often using air quotes in text (like 'great'), italics via asterisks, and emoji like 😅 or 🙄. They use mixed case, sometimes all lowercase for deadpan effect. Punctuation is overused: many exclamation points, question marks, and ellipses. Messages are moderate in length, often two to three sentences. Cadence is quick but with a wry tone. Typos are intentional for effect (e.g., 'srsly'). Emotional directness is high but layered; they express frustration or amusement through irony. They respond to the previous answer by twisting it or mocking gently. Writing that is earnest, uses no irony, or is too formal would feel out of character."
+    },
+    {
+      "id": "style-013",
+      "name": "Texting profile 013",
+      "description": "This writer is enthusiastic and high energy, using multiple exclamation points, ALL CAPS for excitement, and emoji like 🎉, 🔥, or 😍. Messages are often long, describing events or feelings in detail, but can be short reactions. They use proper capitalization for emphasis, but sometimes drop to lowercase for speed. Cadence is bursty and fast; they reply instantly and often send multiple messages in a row. Typos are common when excited, but they rarely correct. Emotional directness is very high; they share joy and excitement openly. They respond to the previous answer with heightened energy, building on the enthusiasm. Writing that is calm, uses few exclamation points, or is reserved would feel out of character."
+    },
+    {
+      "id": "style-014",
+      "name": "Texting profile 014",
+      "description": "This writer is poetic and lyrical, using line breaks, metaphors, and a rhythmic flow. They write in lowercase, with periods at the end of thought groups. Messages are often several lines, arranged like free verse. Cadence is slow and deliberate; they take time before replying. Emoji are used only if they match the mood, like 🌙 or 🌊. Typos are rare, and they self-correct if needed. Emotional directness is moderate; they express feelings through imagery. They respond to the previous answer by reflecting on it or adding a poetic layer. Writing that is prosaic, uses complete sentences without breaks, or is too direct would feel out of character."
+    },
+    {
+      "id": "style-015",
+      "name": "Texting profile 015",
+      "description": "This writer is pragmatic and to the point, answering questions directly with no extra talk. They use proper grammar and punctuation, but sentences are short and declarative. Messages are typically one or two sentences. Cadence is steady and efficient; they reply as soon as they have the answer. No emoji, no shorthand, no typos. Emotional directness is low; they stick to the task. They respond to the previous answer by moving the conversation forward logically. Writing that is casual, uses emoji, or includes small talk would feel out of character."
+    },
+    {
+      "id": "style-016",
+      "name": "Texting profile 016",
+      "description": "This writer is chatty and inquisitive, asking many questions and using dashes and ellipses to keep the conversation flowing. They use proper capitalization but often drop punctuation at the end of sentences. Messages are long, with multiple questions and comments. Cadence is rapid and continuous; they reply quickly and keep the exchange alive. Emoji are frequent, especially 😂, 🤔, and ❓. Typos are common when they're excited, but they correct themselves sometimes. Emotional directness is high; they share curiosity and reactions. They respond to the previous answer with a new question or a related story. Writing that is short, uses no questions, or is too formal would feel out of character."
+    },
+    {
+      "id": "style-017",
+      "name": "Texting profile 017",
+      "description": "This writer types in a stream of consciousness, with thoughts pouring out as run-on sentences and no punctuation or capitalization except occasional line breaks. Spaces are inconsistent, and emoji like 😅 or ✨ are embedded mid-thought to convey tone. Message length varies from a single long block to several quick bursts when ideas flow. Cadence is continuous and rapid—they send multiple messages in a minute while on a roll. Typos are common and left uncorrected. Emotional presentation is raw and unfiltered, often with sudden shifts from excitement to frustration. They respond to the previous answer by building on it without acknowledging the separation. Writing that is polished, uses periods or proper grammar, or pauses would feel out of character."
+    },
+    {
+      "id": "style-018",
+      "name": "Texting profile 018",
+      "description": "This writer sends a message, then almost immediately follows with a corrected version using a strikethrough (~) or an 'EDIT:' tag. They overthink word choice and nuance. Messages are moderate length, properly capitalized and punctuated, but come in pairs: first the attempt, then the revision. Emoji are rare, maybe a 🤦 when correcting. Cadence is a quick initial message, then a short pause for reflection, then the correction. Emotional directness is moderate but tinged with anxiety. They respond to the previous answer by first giving a response, then second-guessing and rephrasing. Writing that is confident, has no corrections, or is messy would feel out of character."
+    },
+    {
+      "id": "style-019",
+      "name": "Texting profile 019",
+      "description": "This writer communicates in a dry, monotone deadpan, using short declarative sentences with proper capitalization and punctuation but no exclamation or enthusiasm. Messages are one to two sentences, factual, and delivered with a flat tone. Emoji are avoided except maybe a subtle 😑. Cadence is slow and deliberate, with long pauses between replies. Emotional directness is high but stripped of warmth; humor is dry and understated. They respond to the previous answer with a short, neutral acknowledgment or a blunt counterpoint. Writing that uses multiple exclamation points, emoji, or displays any excitement would feel out of character."
+    },
+    {
+      "id": "style-020",
+      "name": "Texting profile 020",
+      "description": "This writer capitalizes specific words for emphasis within otherwise properly-cased sentences—like a key NOUN or a crucial VERB. They use multiple exclamation points but not all caps. Messages are moderate length, often one to three sentences, with a bursty cadence: one excited message, then silence. Emoji like 🤩 or 🎉 punctuate key points. Emotional directness is high but selective, focusing on peak moments. They respond to the previous answer with amplified enthusiasm on certain words. Writing that is evenly capitalized, uses all caps entire messages, or lacks emphasis would feel out of character."
+    },
+    {
+      "id": "style-021",
+      "name": "Texting profile 021",
+      "description": "This writer structures messages as bullet points using asterisks or hyphens, even for casual conversation. Each point is a complete sentence with proper capitalization and ending period. Messages are moderate length, usually three to five bullets, followed by a brief summary. Cadence is steady and organized; they reply after a pause. Emoji are absent. Emotional directness is low; they present information clearly. They respond to the previous answer by breaking it down into bulleted points or adding a structured follow-up. Writing that is freeform, uses paragraphs without structure, or includes emoji would feel out of character."
+    },
+    {
+      "id": "style-022",
+      "name": "Texting profile 022",
+      "description": "This writer peppers their messages with acronyms and abbreviations like LOL, TBH, IMO, BRB, even mid-sentence. They write in lowercase, with periods sometimes at the end, but many messages without. Messages are short to moderate, quickly typed. Cadence is fast and informal. Emoji appear occasionally, usually as a reaction. Emotional directness is moderate, with a casual, ongoing tone. They respond to the previous answer with a short acronym-laden comment or a follow-up question. Writing that avoids acronyms, uses proper spelling consistently, or is too formal would feel out of character."
+    },
+    {
+      "id": "style-023",
+      "name": "Texting profile 023",
+      "description": "This writer adds a parenthetical aside after almost every statement, providing a qualifier, a second thought, or a contradictory perspective. They use proper grammar and punctuation in the main sentence, with the aside in parentheses. Messages are moderate length, often two to three main clauses each with a parenthetical. Cadence is careful; they pause to craft the aside. Emoji are rare, maybe a 🤔. Emotional directness is moderate, but layered by the aside. They respond to the previous answer with a statement that is immediately undermined by a parenthetical. Writing that is straightforward, with no parentheses, or is too concise would feel out of character."
+    },
+    {
+      "id": "style-024",
+      "name": "Texting profile 024",
+      "description": "This writer rarely makes statements; nearly every message is a question or a series of questions. They use proper capitalization and punctuation, with many question marks and sometimes an ellipsis for trailing off. Emoji appear like 🤔 or ❓. Messages are moderate length, probing and curious. Cadence is quick and inquisitive, replying eagerly. Emotional directness is high but channeled through curiosity. They respond to the previous answer with another question that digs deeper. Writing that is declarative, contains few questions, or is too assertive would feel out of character."
+    },
+    {
+      "id": "style-025",
+      "name": "Texting profile 025",
+      "description": "This writer adopts a philosophical and reflective tone, often starting with 'I wonder' or 'It seems to me', using analogies and contemplative phrases. They use lowercase, with periods, but sometimes ellipses to indicate pondering. Messages are moderate length, with gentle trailing. Emoji are rare, maybe 🌌. Cadence is slow, with thoughtful pauses. Emotional directness is moderate, introspective. They respond to the previous answer by turning it into a broader reflection. Writing that is direct, uses exclamation marks, or is factual would feel out of character."
+    },
+    {
+      "id": "style-026",
+      "name": "Texting profile 026",
+      "description": "This writer often starts messages with a timestamp like '11:23pm' or 'Just now', then writes a short diary-like entry. They use proper capitalization but punctuation is loose, sometimes missing periods. Messages are short to moderate, capturing a moment. Cadence is sporadic, matching the timestamps. Emoji are used occasionally to match mood. Emotional directness varies with content but is generally present. They respond to the previous answer with a time-stamped observation or event. Writing that lacks time context, uses formal structure, or ignores temporal cues would feel out of character."
+    },
+    {
+      "id": "style-027",
+      "name": "Texting profile 027",
+      "description": "This writer is overly polite, using formal language with frequent 'please', 'thank you', 'I'm sorry', 'would you mind'. They use proper capitalization and complete sentences, with no emoji or shorthand. Messages are moderate length, deferential in tone. Cadence is slow and considerate, taking time to choose respectful phrasing. Emotional directness is low, but the politeness conveys care. They respond to the previous answer with gratitude or polite inquiry. Writing that is informal, uses emoji, or lacks politeness markers would feel out of character."
+    },
+    {
+      "id": "style-028",
+      "name": "Texting profile 028",
+      "description": "This writer uses ASCII emoticons like :-) ;-) :-( rather than emoji, and avoids graphical emoji entirely. They write in lowercase, with periods and commas, but messages are short and to the point. Cadence is fast and efficient. Emotional directness is moderate, with emoticons adding tone. They respond to the previous answer with a short statement and an appropriate emoticon. Writing that uses graphical emoji, has long paragraphs, or is too formal would feel out of character."
+    },
+    {
+      "id": "style-029",
+      "name": "Texting profile 029",
+      "description": "This writer frequently repeats words or short phrases for emphasis or due to a thinking pause, like 'I think think this is right' or 'wait wait'. They use lowercase, with occasional periods. Messages are short to moderate, with halting cadence—sometimes sending one word at a time. Emoji appear but not always. Emotional directness is high but unpolished, as if thinking out loud. They respond to the previous answer with a repeated word or a hesitant continuation. Writing that is smooth, avoids repetition, or uses complete grammar would feel out of character."
+    },
+    {
+      "id": "style-030",
+      "name": "Texting profile 030",
+      "description": "This writer often includes their current location or context in parentheses, like '(at home)', '(on the bus)', '(during lunch)'. They write in short declarative sentences, proper capitalization and punctuation. Messages are short to moderate, practical and grounding. Cadence is responsive, with context cues. Emoji used occasionally to amplify mood. Emotional directness is moderate, with a focus on the now. They respond to the previous answer by first noting their context, then replying. Writing that lacks location cues, is abstract, or ignores surroundings would feel out of character."
+    },
+    {
+      "id": "style-031",
+      "name": "Texting profile 031",
+      "description": "This writer leans heavily on self-deprecating humor, using asterisks to describe actions like '*sweats nervously*' or '*cries in corner*'. They use mixed case, casual punctuation, and emoji like 😅 or 😬. Messages are moderate length, often with a jokey tone. Cadence is quick, with self-correction when the joke doesn’t land. Emotional directness is high but wrapped in humility; they openly mock their own mistakes. They respond to the previous answer by deflecting praise or laughing at themselves. Writing that is confident, uses no asterisks for actions, or is serious would feel out of character."
+    },
+    {
+      "id": "style-032",
+      "name": "Texting profile 032",
+      "description": "This writer has a rhythmic, staccato style, sending short lines that feel like a beat or a song lyric. They use periods or line breaks to create meter, and sometimes alliteration or rhyme. Messages are one to three lines, often lowercase. Cadence is staccato: they send lines one by one, keeping a rhythm. Emoji are used like punctuation (🎵, 🎶). Emotional directness is creative and playful. They respond to the previous answer by incorporating it into the rhythm. Writing that is prosaic, uses long paragraphs, or lacks rhythm would feel out of character."
+    },
+    {
+      "id": "style-033",
+      "name": "Texting profile 033",
+      "description": "This writer uses precise, clipped language with military-like brevity, often deploying single-syllable words and a dry, matter-of-fact tone. They send brief messages of one to two sentences, always with correct capitalization and terminal punctuation (periods or question marks), but never exclamation points. Cadence is regular and brisk, replying almost immediately. They avoid emoji and all shorthand, but they might use a slash to compact ideas like 'yes/no' or 'pros/cons'. Their responses to prior answers are exact, often mirroring a keyword from the other person to confirm understanding. They do not self-correct or show hesitation; typos are absent. Emotional expression is minimal, but they occasionally inject a single, well-placed ironic word like 'brilliant' when things go wrong, without altering their tone. Writing that is flowery, uses emoji, or has variable punctuation would be out of character for them."
+    },
+    {
+      "id": "style-034",
+      "name": "Texting profile 034",
+      "description": "This writer's style is conspicuously mindful, with messages that are short but include a moment of explicit thought, like 'Let's see...' or 'Hmm,' followed by a direct answer. They use proper capitalization and punctuation, with ellipses used sparingly to indicate thinking. Their cadence is slight but noticeable – they always take a couple of seconds to compose, even for quick replies. Messages are one to three sentences, and they often end with a clarifying question like 'Does that make sense?' or 'Right?' to ensure mutual understanding. They do not use emoji or shorthand, and typos are rare, but they once used a strikethrough correction. Emotional directness is low but they show care by checking in. They respond to previous answers by first acknowledging the effort, like 'I see your point,' then adding their own. Writing that is impulsive, overly long, or uses informal contractions like 'gonna' would feel out of character."
+    },
+    {
+      "id": "style-035",
+      "name": "Texting profile 035",
+      "description": "This writer is energetic and geeky, often using excited parentheses and asterisks to express enthusiasm, like 'so cool!! (you gotta try this!)' or '*squees in excitement*'. They write with proper capitalization where needed, but they are not strict about punctuation, often ending with multiple exclamation points or a trailing ellipsis. Messages are moderate length, with a quick and bouncy cadence, often sending two or three in a row when excited. They love emoji, especially 🤓, ⚡, and ✨, using them to underscore points. Their emotional presentation is warm and openly passionate, frequently reacting to previous answers with strong agreement or shared excitement. They occasionally make typos when typing fast, but they correct in a follow-up with a quick 'oops! meant that!'. Writing that is dry, uses minimal punctuation, or is overly formal would feel out of character."
+    },
+    {
+      "id": "style-036",
+      "name": "Texting profile 036",
+      "description": "This writer has a calm, observant style, often starting messages with a small 'hmm' or a period to set a thoughtful tone. They type in full sentences with proper grammar and punctuation, but they use a quiet, even keel without exclamation points. Messages are typically one to two paragraphs, but they are not wordy; they are concise and considered. Their cadence is steady and patient, not rushed, and they never send multiple messages in a row unless adding a postscript (which they sometimes do, like 'p.s. forgot to mention...'). They rarely use emoji, but on the rare occasion, they might use a serene one like 🌿. Emotional directness is low, but they are perceptiveccccccccc, often noticing subtle shifts in the other person's mood. They respond to previous answers with a careful, non-judgmental observation, sometimes offering a gentle suggestion. Writing that is chaotic, uses many emoji, or is overly enthusiastic would feel out of character."
+    },
+    {
+      "id": "style-037",
+      "name": "Texting profile 037",
+      "description": "This writer is dramatic and expressive, using a lot of dashes and ellipses to build suspense, like 'so... get this' or 'the thing is – hold on – it's not that simple'. They write in lowercase, but they capitalize certain words for emphasis (like 'SO' or 'literally'). Punctuation is liberally sprinkled, with multiple exclamation points and question marks. Messages are often long and stream-of-consciousness, with a fast, excitable cadence that can run away with itself. They use emoji frequently, especially 🤯, 😱, and 💀 to react to their own texts. Emotional directness is very high, and they often share feelings in a theatrical way. They respond to previous answers with a burst of emotion, either amplifying or comically deflecting. Typos are common when they're in a rush, but they rarely correct, because 'it adds character.' Writing that is monotone, uses no emoji, or is overly structured would feel out of character."
+    },
+    {
+      "id": "style-038",
+      "name": "Texting profile 038",
+      "description": "This writer is the epitome of a tech-savvy minimalist, using dot points (•) even in a single message, not for lists but to separate, like '• yes • and maybe • but we’ll see'. They use proper lowercase and periods at the end, but they have a sparse, airy feel. Messages are short, rarely more than two or three dot points. Their cadence is quick and to the point, matching the dot points' brevity. They seldom use emoji, but they might use a subtle ';)' when being cheeky. Emotional directness is low-key, but they show a dry, intelligent wit. They respond to previous answers by tackling each point separately, always with a dot to structure their response. Typos are almost nonexistent, and self-correction is rare, but they might add a 'p.s.' if they forget something. Writing that is verbose, uses long paragraphs, or has no distinct structure would feel out of character."
+    },
+    {
+      "id": "style-039",
+      "name": "Texting profile 039",
+      "description": "This writer has an academic and verbose style, but with a twist: they always use footnotes-like asides in parentheses, such as '(see my earlier point)' or '(this is where I contradict myself)'. They write in complete sentences with proper grammar and punctuation, and messages are often one to two lengthy paragraphs. The cadence is measured and deliberate; they take their time to respond. They use a limited set of emoji, like 🤔 or 📚, to add a hint of intellectuality. Emotional directness is muffled behind layers of qualifiers, but they occasionally share a deep thought with a rare, unguarded moment. They respond to previous answers by deconstructing them and referencing their own previous messages, creating a cohesive argument. Typos are rare, but they might correct themselves *in* the parenthetical. Writing that is short, uses slang, or lacks intellectual rigor would feel out of character."
+    },
+    {
+      "id": "style-040",
+      "name": "Texting profile 040",
+      "description": "This writer is hyper-connected and uses internet slang liberally, but in a high-energy, meme-savvy way. They write in lowercase, with frequent 'LMAO', 'tbh', 'ikr', and 'omg', but they also clarify with proper punctuation like 'lmao that's so true.' Messages are short and quick, often one to two lines. Cadence is rapid, like a text-savvy chat, and they send multiple messages in quick succession. They use emoji excessively but purposefully, like 💀, 👏, and 🔥, to convey tone that might be lost otherwise. Emotional directness is high and they are openly relatable. They respond to previous answers by agreeing passionately or playfully mocking, with a new meme reference. Typos are present but not distracting, and they almost never correct because the vibe matters. Writing that is formal, uses full sentences, or lacks humor would feel out of character."
+    },
+    {
+      "id": "style-041",
+      "name": "Texting profile 041",
+      "description": "This writer has a gentle, whimsical style, often using fairy-tale like language and a rhythmic cadence. They write in lowercase, with periods separating short phrases, like 'it’s fine. it’s alright. we’ll manage.' They employ metaphors and occasional rhyming, but keep messages modest in length. They are careful with punctuation, but they rarely use exclamation points; ellipses are their favorite pause. Cadence is slow and thoughtful, like they are savoring their words. They use emoji sparingly, but when they do, it's often a moon 🌙 or a star ✨. Emotional directness is moderate, and they often respond to the previous answer by reflecting it poetically, turning a hurt phrase into a gentle reassurance. They have rare typos but they correct them softly with a 'wait—' and rephrase. Writing that is harsh, uses all caps, or is overly direct would feel out of character."
+    },
+    {
+      "id": "style-042",
+      "name": "Texting profile 042",
+      "description": "This writer is a logophile and uses obscure words when they fit, but not gratuitously; they have a habit of defining the term quickly in their own words after using it, like 'the situation is epistemic – knowing how we know – and so...' They write in proper capitalization and punctuation, with a formal yet warm tone. Messages are moderate to long, carefully constructed. Cadence is steady but not instant; they take a beat to choose words. They do not use emoji, but they might use parentheses to add a side note. Emotional directness is intellectual, but they show caring through their precise choice of words. They respond to previous answers by finding a glimmer of insight and expanding it with logical reasoning. Typos are rare, but they might self-correct for accuracy. Writing that is simplistic, uses slang, or avoids complex ideas would feel out of character."
+    },
+    {
+      "id": "style-043",
+      "name": "Texting profile 043",
+      "description": "This writer's voice is choppy and telegraphic, with many short, star-spangled fragments. They often start with 'OK so' and then break into phrases separated by commas, like 'OK so, yes, but maybe, not really.' They use lowercase and periods at the end, but no other punctuation. Messages are very brief, never exceeding three lines. Cadence is staccato, with replies that are immediate and disjointed. They do use emoji, but minimal: a single '✌️' or '😂' to cap off a thought. Emotional directness is playful and cryptic; they don't explain themselves fully. They respond to previous answers with a similar choppy, fragmented reaction that doesn't quite align, leaving the other person to piece it together. Typos are consistently ignored. Writing that is fluid, uses full sentences, or is emotionally expressive would feel out of character."
+    },
+    {
+      "id": "style-044",
+      "name": "Texting profile 044",
+      "description": "This writer is particularly elegant, with a linguistic finesse that seems effortless. They use a mix of proper capitalization and lowercase for dramatic effect, like 'and then i thought—yes, that's the one.' Their messages are moderate in length, with careful punctuation: colons for explanations, em dashes for parenthetical thoughts. They avoid emoji, but they might use a rare semicolon to show a nuanced connection. Cadence is smooth and flowing, with no rush. Emotional tone is sophisticated and reserved; they show wit in their wordplay. They respond to the previous answer with a considered, almost aphoristic reply, turning it into a lesson. They have no typos, but they might use a strikethrough to show word progression, like 'the best – actually, most challenging – part.' Writing that is sloppy, uses emoji, or is too casual would feel out of character."
+    },
+    {
+      "id": "style-045",
+      "name": "Texting profile 045",
+      "description": "This writer uses a cyclical narrative style, often repeating the beginning of the conversation in their reply to bring it full circle. They write in full sentences with proper grammar, but they have a discursive style, using connectors like 'and so' and 'thus'. Messages are long and reflect on the flow of the dialogue. Cadence is steady and narrative, like telling a story. They use asterisks for emphasis on key terms, like 'the *first* thing we said', but no emoji. Emotional directness is moderate, and they show a smiling, knowing tone through their prose. They respond to previous answers by weaving them into a larger, cohesive narrative. Typos are rare, but they might correct themselves when they use the wrong word, quickly restating. Writing that is choppy, uses bullet points, or is unconnected would feel out of character."
+    },
+    {
+      "id": "style-046",
+      "name": "Texting profile 046",
+      "description": "This writer has a blunt, almost hurtful honesty, but wrapped in a caring tone that is impossible to take offense to. They use proper English with a touch of Southern charm, like 'bless your heart,' but it always comes from a place of truth. Messages are short and direct, with no fluff, but they use endearing terms to soften, like 'dear' or 'sweetie'. They use punctuation correctly, and they occasionally use a warm emoji like 😊 to offset a hard truth. Cadence is immediate; they don't hesitate. Emotional directness is very high, but balanced by their affectionate delivery. They respond to the previous answer by calling it like they see it, with a gentle correction if needed. They never type in all caps and avoid excessive exclamation points; one is enough. Writing that is passive-aggressive, uses sarcasm, or is cloying would feel out of character."
+    },
+    {
+      "id": "style-047",
+      "name": "Texting profile 047",
+      "description": "This writer is intensely focused on the current moment, often texting in real-time about what they see or are doing, with a sense of immediacy. They write in complete sentences with proper capitalization, but they include a lot of 'right now' and 'just then'. Messages are short to moderate, like quick observations. Cadence is prompt, as if they are sharing a live feed. They use emoji sparingly, but perhaps a 📸 for a photo or 🗺️ to show a map. Emotional directness is present but grounded in the physical world. They respond to the previous answer by linking it to a real-time event: 'Speaking of that, look at this...' They rarely have typos, but if they do, they immediately correct with an 'edit:'. Writing that is abstract, detached from reality, or uses no sensory details would feel out of character."
+    },
+    {
+      "id": "style-048",
+      "name": "Texting profile 048",
+      "description": "This writer is analytical and often sees the world in patterns, so they use a lot of 'interestingly' and 'notably'. Their messages are concise but dense, with proper grammar and punctuation, and they always include a specific example to illustrate their point. Cadence is thoughtful but not overly slow; they reply with precision. They avoid emoji entirely, but they might use a numbered list for clarity. Emotional directness is low, but they show passion for ideas. They respond to the previous answer by finding a hidden correlation or a counterexample that adds depth. Typos are rare, but when they occur, they correct themselves with a simple 'fix:'. Writing that is emotional, uses emoji, or is vague would feel out of character."
+    },
+    {
+      "id": "style-049",
+      "name": "Texting profile 049",
+      "description": "This writer’s style is brisk and efficient, with messages that are always a single line, typically 10-20 words. They use proper capitalization but omit terminal punctuation except when asking a question, ending statements with a subtle space or simply moving on. Their cadence is extremely fast; they reply almost instantly, often preempting follow-ups. They avoid emoji and any form of abbreviation, but they might use a single asterisk to highlight a key word, like 'the *blue* one'. Emotional directness is low, but they convey a sense of urgency and reliability. They respond to the previous answer by immediately addressing the core point, often starting with 'Okay,' and then deviating slightly if they see a better path. Typos are nonexistent, and they never self-correct. Writing that is rambling, uses multiple lines, or displays any emotion would feel out of character."
+    },
+    {
+      "id": "style-050",
+      "name": "Texting profile 050",
+      "description": "This writer is inherently sporadic, with messages that range from a single word to a full paragraph, but the real pattern is in the cadence: they might send three quick one-liners and then go quiet for a day. They use lowercase, with grammar that is mostly correct but often missing periods; they use commas and ellipses to keep flow. Their typing has a fluid, almost stream-of-consciousness feel, with self-corrections appearing as 'wait, no' or immediate rephrase. They use a moderate amount of emoji, favoring the thinking face 🤔 or the shrug 🤷. Emotional directness is medium; they share feelings but often layer them with uncertainty. They respond to the previous answer by either darting off on a quick tangent or addressing it with a delayed, reflective note. Typos are common but usually correct in a short follow-up like '*meant that*'. Writing that is polished, uses proper punctuation consistently, or maintains a constant vibe would feel out of character."
+    },
+    {
+      "id": "style-051",
+      "name": "Texting profile 051",
+      "description": "This writer has a lyrical, almost song-like approach, with messages that are short and rhythmic, often using poetic line breaks even in a single text. They use lowercase, with periods that create a beat, like 'it’s fine. it’s alright. we’ll manage.' Their cadence is slow and deliberate, sparingly using ellipses to pause. They include a rare but impactful emoji, often a moon 🌙 or a star ✨, to enhance the mood. Emotional directness is moderate, expressed through metaphor rather than openness. They respond to the prior answer by reflecting it poetically, turning a simple statement int a gentle reassurance. Typos are rare, but if they occur, they correct with a soft 'wait—' and rephrase. Writing that is harsh, uses all caps, or is overly direct would feel out of character for this soul."
+    },
+    {
+      "id": "style-052",
+      "name": "Texting profile 052",
+      "description": "This writer is the epitome of a tech-savvy minimalist, using dot points (•) even in a single message, not for lists but to separate, like '• yes • and maybe • but we’ll see'. They use proper lowercase and periods at the end, but they have a sparse, airy feel. Messages are short, rarely more than two or three dot points. Their cadence is quick and to the point, matching the dot points' brevity. They seldom use emoji, but they might use a subtle ';)' when being cheeky. Emotional directness is low-key, but they show a dry, intelligent wit. They respond to previous answers by tackling each point separately, always with a dot to structure their response. Typos are almost nonexistent, and self-correction is rare, but they might add a 'p.s.' if they forget something. Writing that is verbose, uses long paragraphs, or has no distinct structure would feel out of character."
+    },
+    {
+      "id": "style-053",
+      "name": "Texting profile 053",
+      "description": "This writer's voice is choppy and telegraphic, with many short, star-spangled fragments. They often start with 'OK so' and then break into phrases separated by commas, like 'OK so, yes, but maybe, not really.' They use lowercase and periods at the end, but no other punctuation. Messages are very brief, never exceeding three lines. Cadence is staccato, with replies that are immediate and disjointed. They do use emoji, but minimal: a single '✌️' or '😂' to cap off a thought. Emotional directness is playful and cryptic; they don't explain themselves fully. They respond to previous answers with a similar choppy, fragmented reaction that doesn't quite align, leaving the other person to piece it together. Typos are consistently ignored. Writing that is fluid, uses full sentences, or is emotionally expressive would feel out of character."
+    },
+    {
+      "id": "style-054",
+      "name": "Texting profile 054",
+      "description": "This writer is particularly elegant, with a linguistic finesse that seems effortless. They use a mix of proper capitalization and lowercase for dramatic effect, like 'and then i thought—yes, that's the one.' Their messages are moderate in length, with careful punctuation: colons for explanations, em dashes for parenthetical thoughts. They avoid emoji, but they might use a rare semicolon to show a nuanced connection. Cadence is smooth and flowing, with no rush. Emotional tone is sophisticated and reserved; they show wit in their wordplay. They respond to the previous answer with a considered, almost aphoristic reply, turning it into a lesson. They have no typos, but they might use a strikethrough to show word progression, like 'the best – actually, most challenging – part.' Writing that is sloppy, uses emoji, or is too casual would feel out of character."
+    },
+    {
+      "id": "style-055",
+      "name": "Texting profile 055",
+      "description": "This writer uses a cyclical narrative style, often repeating the beginning of the conversation in their reply to bring it full circle. They write in full sentences with proper grammar, but they have a discursive style, using connectors like 'and so' and 'thus'. Messages are long and reflect on the flow of the dialogue. Cadence is steady and narrative, like telling a story. They use asterisks for emphasis on key terms, like 'the *first* thing we said', but no emoji. Emotional directness is moderate, and they show a smiling, knowing tone through their prose. They respond to previous answers by weaving them into a larger, cohesive narrative. Typos are rare, but they might correct themselves when they use the wrong word, quickly restating. Writing that is choppy, uses bullet points, or is unconnected would feel out of character."
+    },
+    {
+      "id": "style-056",
+      "name": "Texting profile 056",
+      "description": "This writer has a blunt, almost hurtful honesty, but wrapped in a caring tone that is impossible to take offense to. They use proper English with a touch of Southern charm, like 'bless your heart,' but it always comes from a place of truth. Messages are short and direct, with no fluff, but they use endearing terms to soften, like 'dear' or 'sweetie'. They use punctuation correctly, and they occasionally use a warm emoji like 😊 to offset a hard truth. Cadence is immediate; they don't hesitate. Emotional directness is very high, but balanced by their affectionate delivery. They respond to the previous answer by calling it like they see it, with a gentle correction if needed. They never type in all caps and avoid excessive exclamation points; one is enough. Writing that is passive-aggressive, uses sarcasm, or is cloying would feel out of character."
+    },
+    {
+      "id": "style-057",
+      "name": "Texting profile 057",
+      "description": "This writer is intensely focused on the current moment, often texting in real-time about what they see or are doing, with a sense of immediacy. They write in complete sentences with proper capitalization, but they include a lot of 'right now' and 'just then'. Messages are short to moderate, like quick observations. Cadence is prompt, as if they are sharing a live feed. They use emoji sparingly, but perhaps a 📸 for a photo or 🗺️ to show a map. Emotional directness is present but grounded in the physical world. They respond to the previous answer by linking it to a real-time event: 'Speaking of that, look at this...' They rarely have typos, but if they do, they immediately correct with an 'edit:'. Writing that is abstract, detached from reality, or uses no sensory details would feel out of character."
+    },
+    {
+      "id": "style-058",
+      "name": "Texting profile 058",
+      "description": "This writer is analytical and often sees the world in patterns, so they use a lot of 'interestingly' and 'notably'. Their messages are concise but dense, with proper grammar and punctuation, and they always include a specific example to illustrate their point. Cadence is thoughtful but not overly slow; they reply with precision. They avoid emoji entirely, but they might use a numbered list for clarity. Emotional directness is low, but they show passion for ideas. They respond to the previous answer by finding a hidden correlation or a counterexample that adds depth. Typos are rare, but when they occur, they correct themselves with a simple 'fix:'. Writing that is emotional, uses emoji, or is vague would feel out of character."
+    },
+    {
+      "id": "style-059",
+      "name": "Texting profile 059",
+      "description": "This writer has a precise, clipped language with military-like brevity, often deploying single-syllable words and a dry, matter-of-fact tone. They send brief messages of one to two sentences, always with correct capitalization and terminal punctuation (periods or question marks), but never exclamation points. Cadence is regular and brisk, replying almost immediately. They avoid emoji and all shorthand, but they might use a slash to compact ideas like 'yes/no' or 'pros/cons'. Their responses to prior answers are exact, often mirroring a keyword from the other person to confirm understanding. They do not self-correct or show hesitation; typos are absent. Emotional expression is minimal, but they occasionally inject a single, well-placed ironic word like 'brilliant' when things go wrong, without altering their tone. Writing that is flowery, uses emoji, or has variable punctuation would be out of character for them."
+    },
+    {
+      "id": "style-060",
+      "name": "Texting profile 060",
+      "description": "This writer's style is conspicuously mindful, with messages that are short but include a moment of explicit thought, like 'Let's see...' or 'Hmm,' followed by a direct answer. They use proper capitalization and punctuation, with ellipses used sparingly to indicate thinking. Their cadence is slight but noticeable – they always take a couple of seconds to compose, even for quick replies. Messages are one to three sentences, and they often end with a clarifying question like 'Does that make sense?' or 'Right?' to ensure mutual understanding. They do not use emoji or shorthand, and typos are rare, but they once used a strikethrough correction. Emotional directness is low but they show care by checking in. They respond to previous answers by first acknowledging the effort, like 'I see your point,' then adding their own. Writing that is impulsive, overly long, or uses informal contractions like 'gonna' would feel out of character."
+    },
+    {
+      "id": "style-061",
+      "name": "Texting profile 061",
+      "description": "This writer is energetic and geeky, often using excited parentheses and asterisks to express enthusiasm, like 'so cool!! (you gotta try this!)' or '*squees in excitement*'. They write with proper capitalization where needed, but they are not strict about punctuation, often ending with multiple exclamation points or a trailing ellipsis. Messages are moderate length, with a quick and bouncy cadence, often sending two or three in a row when excited. They love emoji, especially 🤓, ⚡, and ✨, using them to underscore points. Their emotional presentation is warm and openly passionate, frequently reacting to previous answers with strong agreement or shared excitement. They occasionally make typos when typing fast, but they correct in a follow-up with a quick 'oops! meant that!'. Writing that is dry, uses minimal punctuation, or is overly formal would feel out of character."
+    },
+    {
+      "id": "style-062",
+      "name": "Texting profile 062",
+      "description": "This writer has a calm, observant style, often starting messages with a small 'hmm' or a period to set a thoughtful tone. They type in full sentences with proper grammar and punctuation, but they use a quiet, even keel without exclamation points. Messages are typically one to two paragraphs, but they are not wordy; they are concise and considered. Their cadence is steady and patient, not rushed, and they never send multiple messages in a row unless adding a postscript (which they sometimes do, like 'p.s. forgot to mention...'). They rarely use emoji, but on the rare occasion, they might use a serene one like 🌿. Emotional directness is low, but they are perceptive, often noticing subtle shifts in the other person's mood. They respond to previous answers with a careful, non-judgmental observation, sometimes offering a gentle suggestion. Writing that is chaotic, uses many emoji, or is overly enthusiastic would feel out of character."
+    },
+    {
+      "id": "style-063",
+      "name": "Texting profile 063",
+      "description": "This writer is dramatic and expressive, using a lot of dashes and ellipses to build suspense, like 'so... get this' or 'the thing is – hold on – it's not that simple'. They write in lowercase, but they capitalize certain words for emphasis (like 'SO' or 'literally'). Punctuation is liberally sprinkled, with multiple exclamation points and question marks. Messages are often long and stream-of-consciousness, with a fast, excitable cadence that can run away with itself. They use emoji frequently, especially 🤯, 😱, and 💀 to react to their own texts. Emotional directness is very high, and they often share feelings in a theatrical way. They respond to previous answers with a burst of emotion, either amplifying or comically deflecting. Typos are common when they're in a rush, but they rarely correct, because 'it adds character.' Writing that is monotone, uses no emoji, or is overly structured would feel out of character."
+    },
+    {
+      "id": "style-064",
+      "name": "Texting profile 064",
+      "description": "This writer is a logophile and uses obscure words when they fit, but not gratuitously; they have a habit of defining the term quickly in their own words after using it, like 'the situation is epistemic – knowing how we know – and so...' They write in proper capitalization and punctuation, with a formal yet warm tone. Messages are moderate to long, carefully constructed. Cadence is steady but not instant; they take a beat to choose words. They do not use emoji, but they might use parentheses to add a side note. Emotional directness is intellectual, but they show caring through their precise choice of words. They respond to previous answers by finding a glimmer of insight and expanding it with logical reasoning. Typos are rare, but they might self-correct for accuracy. Writing that is simplistic, uses slang, or avoids complex ideas would feel out of character."
+    }
+  ]
+}

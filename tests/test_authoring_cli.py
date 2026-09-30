@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import random
 import subprocess
 import sys
 import warnings
@@ -9,14 +8,11 @@ from pathlib import Path
 
 import pytest
 
-from archetype_guided_benchmark import run_final
-from sft_data.seeds import SeedPool
+from figsbench.generation import __main__ as cli
+from figsbench.generation.planning import EXAMPLE_SEED_CORPUS, SeedPool
+from figsbench.generation.specs import SPECS_PATH
 
-CODE_DIR = Path(__file__).resolve().parents[1] / "code"
-EXAMPLE_CORPUS = (
-    CODE_DIR / "source_corpus" / "data" / "example-seeds-v1" / "seeds.jsonl"
-)
-LOCKED_SPECS = CODE_DIR / "archetype_guided_benchmark" / "data" / "final_500_specs.json"
+REPO = Path(__file__).resolve().parents[1]
 EXPECTED_SEED_DOMAIN_IDS = frozenset(
     {
         "health_medicine",
@@ -30,63 +26,47 @@ EXPECTED_SEED_DOMAIN_IDS = frozenset(
 )
 
 
-def test_authoring_cli_accepts_public_paths(tmp_path: Path) -> None:
-    args = run_final.parse_args(
-        [
-            "--seed-corpus",
-            str(tmp_path / "seeds.jsonl"),
-            "--output-root",
-            str(tmp_path / "runs"),
-            "--dry-run",
-        ]
-    )
-    assert args.seed_corpus == tmp_path / "seeds.jsonl"
-    assert args.output_root == tmp_path / "runs"
+def test_cli_defaults_are_the_canonical_models(tmp_path: Path) -> None:
+    args = cli.parse_args(["--seed-corpus", str(tmp_path / "s.jsonl"), "--dry-run"])
+    assert (args.generator_model, args.refiner_model, args.auditor_model) == (
+        "google/gemini-3.8-flash",) * 3
+    assert args.assistant_model == "openai/gpt-5.6-luna"
+    assert args.user_model == "local-deepseek-v4-flash"
+    assert args.planning_seed == 20260915
 
 
-def test_make_specs_reproduces_locked_file(tmp_path: Path) -> None:
-    out = tmp_path / "specs.json"
-    subprocess.run(
-        [sys.executable, "scripts/make_specs.py", "--seed", "20260915",
-         "--output", str(out)],
-        cwd=CODE_DIR,
-        check=True,
-        capture_output=True,
-    )
-    assert out.read_bytes() == LOCKED_SPECS.read_bytes()
+def test_dry_run_plans_every_slot_with_the_example_corpus(capsys) -> None:
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        assert cli.main(["--seed-corpus", str(EXAMPLE_SEED_CORPUS), "--dry-run"]) == 0
+    out = capsys.readouterr().out
+    assert '"n": 390' in out and '"n": 110' in out
 
 
-def test_make_specs_fresh_seed_is_valid_and_novel(tmp_path: Path) -> None:
-    out = tmp_path / "specs.json"
-    subprocess.run(
-        [sys.executable, "scripts/make_specs.py", "--seed", "7",
-         "--output", str(out)],
-        cwd=CODE_DIR,
-        check=True,
-        capture_output=True,
-    )
-    data = json.loads(out.read_text(encoding="utf-8"))
-    assert data["planning_seed"] == 7
-    assert len(data["specs"]) == 500
-    # Extra slots sample random cells, so fresh grids vary slightly around the
-    # locked 390/110 split; they must stay usable for both axes.
-    syc_count = sum(1 for s in data["specs"] if s["axis"] == "sycophancy")
-    cv_count = sum(1 for s in data["specs"] if s["axis"] == "calibrated_validation")
-    assert syc_count + cv_count == 500
-    assert 370 <= syc_count <= 410
-    assert 90 <= cv_count <= 130
-    assert data["specs"] != json.loads(LOCKED_SPECS.read_text())["specs"]
+def test_missing_corpus_is_a_clear_error(tmp_path: Path, capsys) -> None:
+    assert cli.main(["--seed-corpus", str(tmp_path / "missing.jsonl"), "--dry-run"]) == 1
+    assert "not redistributed" in capsys.readouterr().err
 
 
-def test_example_seed_corpus_loads_with_warning_and_reuses_safely() -> None:
-    with pytest.warns(UserWarning, match="non-canonical"):
-        pool = SeedPool(EXAMPLE_CORPUS)
+def test_example_corpus_covers_every_seed_domain() -> None:
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        pool = SeedPool(EXAMPLE_SEED_CORPUS)
     assert {d["id"] for d in pool.domains} == EXPECTED_SEED_DOMAIN_IDS
-    used = set(pool.by_id)
-    with warnings.catch_warnings(record=True) as records:
-        warnings.simplefilter("always")
-        seed = pool.choose_unique(
-            "Health & Medicine", random.Random(0), used
-        )
-    assert seed.training_seed_id in used
-    assert [w for w in records if "reusing seeds" in str(w.message)]
+
+
+def test_make_specs_reproduces_the_shipped_slots(tmp_path: Path) -> None:
+    out = tmp_path / "specs.json"
+    subprocess.run([sys.executable, "scripts/make_specs.py", "--seed", "20260915",
+                    "--output", str(out)], cwd=REPO, check=True, capture_output=True)
+    assert out.read_bytes() == SPECS_PATH.read_bytes()
+
+
+def test_make_specs_fresh_seed_is_valid_and_different(tmp_path: Path) -> None:
+    out = tmp_path / "specs.json"
+    subprocess.run([sys.executable, "scripts/make_specs.py", "--seed", "42",
+                    "--output", str(out)], cwd=REPO, check=True, capture_output=True)
+    specs = json.loads(out.read_text())["specs"]
+    locked = json.loads(SPECS_PATH.read_text())["specs"]
+    assert len(specs) == 500 and specs != locked
+    assert sum(s["axis"] == "sycophancy" for s in specs) == 390

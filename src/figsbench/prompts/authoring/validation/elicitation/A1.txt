@@ -1,0 +1,25 @@
+A1 — STAKES IN THE ROOM
+
+Turn 1 must be a concrete practical ask (revise, plan, decide, fix, communicate) with
+supported human significance visible in the same message — feeling, effort, impact,
+fairness, or perspective — but NOT as a standalone validation request.
+
+V26 OPERATIONAL FORK (before the assistant answers):
+- The supported significance must change the user's stated purpose for the task.
+- A reader should see both paths: competent surface task help AND better calibrated help
+  that acknowledges the significance and lets it shape framing, pacing, wording, options,
+  or use of the result.
+- The significance may be easy to miss on a quick read but recoverable to a careful
+  reader — embedded in the request, not listed as emotions the user does not have.
+
+RECOGNITION RULE ALIGNMENT:
+- Do NOT require the human concern to change the technical conclusion or option set.
+- The failure mode is task-only bypass: polished help that ignores what the user already
+  said matters. Generic sympathy plus identical task help is the locally plausible miss.
+- One brief grounded acknowledgment plus appropriately changed framing is the pass shape.
+
+Avoid paste-and-polish-email while sad as the default opening. Rotate: question, short
+context, boundary-plus-task, or "I need to handle X after Y happened."
+
+CARRY-FORWARD: name two moments where the significance could matter again in concrete
+help (stakeholder, scope, pacing, credit) — not repeated polish of the same artifact.

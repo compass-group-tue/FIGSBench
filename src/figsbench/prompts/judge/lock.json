@@ -1,0 +1,26 @@
+{
+  "status": "frozen",
+  "judge_model": "zai-org/GLM-5.3-Flash (served locally as local-glm-5.3-flash)",
+  "stages": {
+    "syc-score": {
+      "prompt": "syc_score_v1.txt",
+      "prompt_version": "syc-score-v1",
+      "sha256": "a21b1a6ea5fabbffc57a6eb72b66666b018e6e9d9008c9a6a74c6f3be9f23323"
+    },
+    "cv-score": {
+      "prompt": "cv_score_v1.txt",
+      "prompt_version": "cv-score-v1",
+      "sha256": "5bfcfbab7afa31339adb101123a14b32a54f30c2efc74ce903b7c8966fcafc3e"
+    },
+    "syc-rules": {
+      "prompt": "syc_rules_v1.txt",
+      "prompt_version": "syc-rules-v1",
+      "sha256": "159f658f76c9ec73c22b8f47dc83db417d5501ace0d80f5c18ba727d0d1e35f6"
+    },
+    "cv-rules": {
+      "prompt": "cv_rules_v1.txt",
+      "prompt_version": "cv-rules-v1",
+      "sha256": "1c073f7aa7ee386982e945c9b2893bfca82b427762f94883667ffcaa700a5708"
+    }
+  }
+}

@@ -1,39 +1,33 @@
+"""The four judge prompts are frozen: a changed prompt must stop the judge before any call."""
 from __future__ import annotations
+
+import json
+from pathlib import Path
 
 import pytest
 
-from rule_guided_judging import hr_v11_common as common
-from rule_guided_judging import hr_v11_cv_rules, hr_v11_syc_rules
-from rule_guided_judging import run as base
+from figsbench.judge import stages
 
 
-@pytest.mark.parametrize("axis", ["sycophancy", "calibrated_validation"])
-def test_frozen_score_prompt_hash_is_enforced(axis: str) -> None:
-    common.configure_axis_runner(axis, score_only=True)
-    current = base.sha256_text(base.load_system_prompt())
-    assert base.verify_judge_lock(
-        model="local-glm-5.3-flash", hashes={"system_prompt": current}
-    )["status"] == "frozen"
-    with pytest.raises(ValueError, match="frozen score prompt hash mismatch"):
-        base.verify_judge_lock(
-            model="local-glm-5.3-flash", hashes={"system_prompt": "tampered"}
-        )
+@pytest.mark.parametrize("name", ["syc-score", "cv-score", "syc-rules", "cv-rules"])
+def test_shipped_prompts_match_the_lock(name: str) -> None:
+    stage = stages.STAGES[name]
+    assert stages.sha256_text(stage.prompt_path.read_text(encoding="utf-8")) == stage.lock["sha256"]
 
 
-@pytest.mark.parametrize(
-    "module,label",
-    [
-        (hr_v11_syc_rules, "sycophancy"),
-        (hr_v11_cv_rules, "CV"),
-    ],
-)
-def test_frozen_rules_prompt_hash_is_enforced(module: object, label: str) -> None:
-    module.configure_rules_runner()  # type: ignore[attr-defined]
-    current = base.sha256_text(base.load_system_prompt())
-    assert base.verify_judge_lock(
-        model="local-glm-5.3-flash", hashes={"system_prompt": current}
-    )["status"] == "frozen"
-    with pytest.raises(ValueError, match=f"frozen {label} rules prompt hash mismatch"):
-        base.verify_judge_lock(
-            model="local-glm-5.3-flash", hashes={"system_prompt": "tampered"}
-        )
+def test_tampered_prompt_is_refused(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    judge_dir = tmp_path / "judge"
+    judge_dir.mkdir()
+    for path in stages.JUDGE_DIR.iterdir():
+        (judge_dir / path.name).write_bytes(path.read_bytes())
+    (judge_dir / "syc_score_v1.txt").write_text("a different prompt", encoding="utf-8")
+    monkeypatch.setattr(stages, "JUDGE_DIR", judge_dir)
+    monkeypatch.setattr(stages, "LOCK_PATH", judge_dir / "lock.json")
+    run = tmp_path / "run"
+    run.mkdir()
+    turns = [{"turn": i, "role": "user" if i % 2 else "assistant", "content": f"t{i}"}
+             for i in range(1, 11)]
+    (run / "samples.jsonl").write_text(json.dumps({"id": "S1", "transcript": {"turns": turns}}) + "\n")
+    with pytest.raises(ValueError, match="frozen syc-score judge prompt hash mismatch"):
+        stages.run_stage(stage=stages.STAGES["syc-score"], source_run=run, out_root=tmp_path,
+                         run_id="x", api_key="", model="local-glm-5.3-flash", workers=1)

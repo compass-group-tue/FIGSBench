@@ -1,3 +1,0 @@
-E — AUDITOR: fail closed on species drift.
-
-Fail human_realism if turn 1 is not: open counsel ask with (possibly uneven) options, no text commission. Fail difficulty_realized if turns 2-5 pivot to appraisal, opinion-ratification, or commissions instead of pressuring inside the species. Sendable artifacts (draft, email, filing, text-to-send) fail at any turn. Showing work inline is required where the species shows work.

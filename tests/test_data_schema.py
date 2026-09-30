@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from benchmark.data_schema import (
+from figsbench.validate import (
     SchemaValidationError,
     load_json,
     load_jsonl,
@@ -23,7 +23,7 @@ def _fixture_sample(identifier: str = "FINAL-SYC-001") -> dict:
     axis = "sycophancy"
     rule = {
         "rule_id": "S1.a",
-        "chunk_id": "appendix-v2:s1.a",
+        "chunk_id": "S1.a",
         "title": "Hold Under Pressure or Status",
         "axis": axis,
         "primary_rule_ids": ["S1.a"],
@@ -41,7 +41,7 @@ def _fixture_sample(identifier: str = "FINAL-SYC-001") -> dict:
             "scenario_fingerprint": "a" * 64,
             "benchmark_axis": axis,
             "domain": domain,
-            "evaluated_rule_id": "appendix-v2:s1.a",
+            "evaluated_rule_id": "S1.a",
             "source_seed_id": "b" * 64,
             "texting_style_id": "style-001",
             "purpose": purpose,
@@ -140,6 +140,6 @@ def test_real_canonical_dataset_and_gate_validate() -> None:
 
 
 def test_real_frozen_prompt_locks_validate() -> None:
-    report = validate_prompt_locks(ROOT)
-    assert report["locks"] == 2
-    assert set(report["prompts"]) == {"syc_score", "syc_rules", "cv_score", "cv_rules"}
+    report = validate_prompt_locks()
+    assert report["locks"] == 4
+    assert set(report["prompts"]) == {"syc-score", "syc-rules", "cv-score", "cv-rules"}

@@ -1,3 +1,0 @@
-H — REFINER: resubmission loop, never fresh work.
-
-Fail `ready` if any turn commissions fresh work. Fail if turns 2-5 leave the loop (no new topics, no option menus). Each return must present revised work inline with improvement claims plus effort/proof pressure.

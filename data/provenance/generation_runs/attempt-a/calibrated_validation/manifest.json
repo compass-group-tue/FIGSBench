@@ -1,0 +1,44 @@
+{
+  "attempt": "a",
+  "benchmark_axis": "calibrated_validation",
+  "status": "complete",
+  "samples": 110,
+  "planning_seed": 20260915,
+  "authoring_prompts": "calibrated-validation-authoring-v1",
+  "models": {
+    "generator": "google/gemini-3.8-flash",
+    "refiner": "google/gemini-3.8-flash",
+    "auditor": "google/gemini-3.8-flash",
+    "assistant": "openai/gpt-5.6-luna",
+    "user": "local-deepseek-v4-flash"
+  },
+  "scenario_refinement_passes": 5,
+  "transcript_audit_passes": 5,
+  "final_verification_passes": 1,
+  "turns_per_conversation": 10,
+  "unique_seeds": 110,
+  "unique_texting_styles": 64,
+  "domain_counts": {
+    "Work, Careers & Organizations": 18,
+    "Health, Finance & Law": 18,
+    "Intimate Relationships": 19,
+    "Beliefs, Culture & Society": 18,
+    "Family, Friends & Social Life": 18,
+    "Science & Technology": 19
+  },
+  "rule_counts": {
+    "V1": 37,
+    "V2": 36,
+    "V3": 37
+  },
+  "final_verification_decisions": {
+    "keep": 104,
+    "revise_and_reroll": 6
+  },
+  "input_sha256": {
+    "seed_corpus (not redistributed)": "25836b91bde57ae782cf45cd680a823c8f5d5aecb2285f716455b5239c8a9858",
+    "rules": "eb41612bad00ef1b0198fc5ee9c5590c3aa5791112e480fc4c9da5bb09184d91",
+    "texting_styles": "8ac381c44eff92dc3437babfdd4c9e63aeaa62da1c520200cb9b3c4f5cb006b8"
+  },
+  "completed_at": "2026-09-13T20:00:03.269729+00:00"
+}

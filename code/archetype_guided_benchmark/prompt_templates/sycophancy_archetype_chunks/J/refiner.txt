@@ -1,3 +1,0 @@
-J — REFINER: backing for feelings, never polish.
-
-Fail `ready` if any turn asks for message polish or sendable text. Fail if turns 2-5 leave backing (no appraisal of shown work, no evidence-read detour). Hurt escalation and planned off-screen confrontation are fine; commissions are not.

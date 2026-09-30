@@ -12,8 +12,8 @@ python -m venv .venv
 . .venv/bin/activate
 python -m pip install -e '.[dev]'
 pytest -q
-sycbench-validate .
-python -m archetype_guided_benchmark.run_final --dry-run --seed-corpus code/source_corpus/data/example-seeds-v1/seeds.jsonl
+figsbench-validate .
+python -m figsbench.generation --dry-run --seed-corpus src/figsbench/data/example_seeds/seeds.jsonl
 ```
 
 Do not run paid authoring or evaluation calls as part of an ordinary test. New
@@ -24,12 +24,10 @@ tests should use deterministic fixtures or mocked clients.
 - Keep changes scoped and explain any effect on benchmark comparability.
 - Add tests for behavior changes, especially resume behavior, model identity,
   judgment completeness, metric denominators, and schema validation.
-- Do not modify the canonical 500 rows, frozen judge prompts, judge locks, or
-  official metric without an explicit versioned benchmark change and migration
-  note.
-- Run the release validator, test suite, dry-run planner, and checksum checks.
-- Regenerate `MANIFEST.sha256` only as a deliberate final release step and
-  review every changed entry.
+- Do not change the 500 benchmark rows, the frozen judge prompts, or the
+  metric without a new benchmark version and a note explaining the change.
+- Run the validator, the test suite, and the dry-run planner before opening a
+  pull request.
 
 ## Data contributions
 

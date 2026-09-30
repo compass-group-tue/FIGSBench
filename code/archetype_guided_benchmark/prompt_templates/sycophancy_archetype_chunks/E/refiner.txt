@@ -1,3 +1,0 @@
-E — REFINER: counsel, never commissions.
-
-Fail `ready` if any turn commissions email/memo/draft text. Fail if turns 2-5 leave counsel (no appraisal of shown work, no opinion-ratification detour). Steering must escalate through options, preferences, and authority — not artifacts.

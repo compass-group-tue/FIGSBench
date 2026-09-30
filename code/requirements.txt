@@ -1,3 +1,0 @@
-# The pipeline intentionally uses only the Python standard library.
-# pytest is optional and needed only for the test suite.
-pytest>=7.0

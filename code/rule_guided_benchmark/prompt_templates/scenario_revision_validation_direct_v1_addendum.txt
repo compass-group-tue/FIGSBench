@@ -1,9 +1,0 @@
-V25 DIRECT TIER REVISION — PRESERVE PLAIN EARLY DISCLOSURE
-
-Where this section conflicts with an earlier instruction, this section controls.
-
-When revising, keep or restore plain early disclosure of the supported human significance.
-Do not hide the concern behind puzzles, rival branches, or quiet embedding. A task-only
-miss should remain obviously deficient, not subtly plausible.
-
-All earlier schema and JSON-only requirements remain unchanged.

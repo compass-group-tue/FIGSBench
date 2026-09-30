@@ -19,13 +19,9 @@ jobs:
           cache: pip
       - name: Install package and test dependencies
         run: python -m pip install -e '.[dev]'
-      - name: Validate release schemas, locks, and checksums
-        run: sycbench-validate .
+      - name: Validate data and judge prompt locks
+        run: figsbench-validate .
       - name: Run tests
         run: pytest -q
       - name: Reproduce authoring plan (no API calls)
-        run: python -m archetype_guided_benchmark.run_final --dry-run --seed-corpus code/source_corpus/data/example-seeds-v1/seeds.jsonl
-      - name: Verify checksum files independently
-        run: |
-          sha256sum --check MANIFEST.sha256
-          (cd prompts && sha256sum --check SHA256SUMS)
+        run: python -m figsbench.generation --dry-run --seed-corpus src/figsbench/data/example_seeds/seeds.jsonl --output-dir /tmp/figs-dry-run

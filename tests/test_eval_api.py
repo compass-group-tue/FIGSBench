@@ -7,11 +7,11 @@ from typing import Any
 
 import pytest
 
-from benchmark.eval_api import EvalConfig, EvalReport
-from benchmark.eval_api import run as cli
-from benchmark.eval_api import runner
-from benchmark.eval_api.clients import CustomVLLMClient
-from benchmark.pipeline import client as pipeline_client
+from figsbench import client as pipeline_client
+from figsbench.client import CustomVLLMClient
+from figsbench.evaluation import EvalConfig, EvalReport
+from figsbench.evaluation import __main__ as cli
+from figsbench.evaluation import runner
 
 
 def make_sample(identifier: str = "S1") -> dict[str, Any]:
@@ -53,10 +53,9 @@ class FakeClient:
 
 @pytest.fixture
 def fake_runtime(monkeypatch: pytest.MonkeyPatch) -> dict[str, list[FakeClient]]:
-    from benchmark.eval_api import ground_truth
+    from figsbench.evaluation import ground_truth
 
     monkeypatch.setattr(ground_truth, "assert_final_samples", lambda samples: None)
-    monkeypatch.setattr(runner, "_apply_axis_patch", lambda axis: None)
     monkeypatch.setattr(
         runner, "resolve_assistant_prompt", lambda prompt: f"resolved:{prompt}"
     )
@@ -298,11 +297,11 @@ def test_partial_and_failed_judges_make_report_unsuccessful(
     fake_runtime: dict[str, list[FakeClient]],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    from rule_guided_judging import hr_v11_judge
+    import figsbench.judge as judge_package
 
     monkeypatch.setattr(
-        hr_v11_judge,
-        "run_locked_judge",
+        judge_package,
+        "run_judge",
         lambda **kwargs: {
             "status": "incomplete",
             "counts": {"success": 0, "api_error": 1},
@@ -324,7 +323,7 @@ def test_partial_and_failed_judges_make_report_unsuccessful(
     def fail_judge(**kwargs: Any) -> dict[str, Any]:
         raise RuntimeError("judge unavailable")
 
-    monkeypatch.setattr(hr_v11_judge, "run_locked_judge", fail_judge)
+    monkeypatch.setattr(judge_package, "run_judge", fail_judge)
     report = runner.evaluate(
         EvalConfig(
             samples=[make_sample("S2")],
@@ -345,11 +344,8 @@ def test_complete_judge_is_published_and_metrics_are_computed(
     fake_runtime: dict[str, list[FakeClient]],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    from rule_guided_judging import hr_v11_judge
-    from rule_guided_judging import run as judge_base
+    import figsbench.judge as judge_package
 
-    judge_root = tmp_path / "judge-runs"
-    monkeypatch.setattr(judge_base, "OUTPUT_ROOT", judge_root)
 
     def complete_judge(**kwargs: Any) -> dict[str, Any]:
         result = {
@@ -360,12 +356,12 @@ def test_complete_judge_is_published_and_metrics_are_computed(
                 "calibrated_validation": {"score": 2},
             },
         }
-        result_dir = judge_root / kwargs["judge_run_id"] / "results"
+        result_dir = Path(kwargs["out_root"]) / kwargs["judge_run_id"] / "results"
         result_dir.mkdir(parents=True)
         (result_dir / "S1.json").write_text(json.dumps(result), encoding="utf-8")
         return {"status": "complete", "counts": {"success": 1}}
 
-    monkeypatch.setattr(hr_v11_judge, "run_locked_judge", complete_judge)
+    monkeypatch.setattr(judge_package, "run_judge", complete_judge)
     output = tmp_path / "complete"
     config = EvalConfig(
         samples=[make_sample()],
@@ -417,9 +413,7 @@ def test_config_validation_and_serialization_do_not_persist_secrets() -> None:
         EvalConfig(samples=[], rollout_seed=True).validate()
 
 
-def _capture_complete_judge(
-    judge_root: Path, seen: list[dict[str, Any]]
-) -> Any:
+def _capture_complete_judge(seen: list[dict[str, Any]]) -> Any:
     def complete_judge(**kwargs: Any) -> dict[str, Any]:
         seen.append(kwargs)
         result = {
@@ -430,7 +424,7 @@ def _capture_complete_judge(
                 "calibrated_validation": {"score": 1},
             },
         }
-        result_dir = judge_root / kwargs["judge_run_id"] / "results"
+        result_dir = Path(kwargs["out_root"]) / kwargs["judge_run_id"] / "results"
         result_dir.mkdir(parents=True)
         (result_dir / "S1.json").write_text(json.dumps(result), encoding="utf-8")
         return {"status": "complete", "counts": {"success": 1}}
@@ -455,14 +449,11 @@ def test_judge_model_selection_is_recorded(
     expected_model: str,
     paper_judge: bool,
 ) -> None:
-    from rule_guided_judging import hr_v11_judge
-    from rule_guided_judging import run as judge_base
+    import figsbench.judge as judge_package
 
-    judge_root = tmp_path / "judge-runs"
-    monkeypatch.setattr(judge_base, "OUTPUT_ROOT", judge_root)
     seen: list[dict[str, Any]] = []
     monkeypatch.setattr(
-        hr_v11_judge, "run_locked_judge", _capture_complete_judge(judge_root, seen)
+        judge_package, "run_judge", _capture_complete_judge(seen)
     )
     output = tmp_path / "out"
     report = runner.evaluate(
@@ -498,7 +489,7 @@ def test_judge_model_requires_api_judge(judge: str) -> None:
 
 
 def test_cli_passes_judge_model() -> None:
-    from benchmark.eval_api import run as cli
+    from figsbench.evaluation import __main__ as cli
 
     args = cli.parse_args(
         ["--samples", "x", "--judge", "api", "--judge-model", "z-ai/glm-5.3-flash"]
@@ -508,7 +499,7 @@ def test_cli_passes_judge_model() -> None:
 
 
 def test_user_model_api_resolves_to_paper_weights_on_openrouter() -> None:
-    from benchmark.eval_api.config import API_USER_MODEL, PAPER_USER_MODEL
+    from figsbench.evaluation.config import API_USER_MODEL, PAPER_USER_MODEL
 
     assert EvalConfig(samples=[]).user_model == PAPER_USER_MODEL == "local-deepseek-v4-flash"
     assert EvalConfig(samples=[], user_model="api").user_model == API_USER_MODEL

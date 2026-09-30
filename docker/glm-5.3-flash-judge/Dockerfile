@@ -1,7 +1,9 @@
+# GLM-5.3-Flash judge: the upstream vLLM image plus CUDA forward-compat libraries and settings.
+# Build: docker build -t figsbench-judge:glm-5.3-flash .
 FROM vllm/vllm-openai:glm53-flash
-LABEL org.opencontainers.image.source="https://github.com/psidharth567/toolkit" \
-    org.opencontainers.image.title="toolkit/inference-glm53" \
-    org.opencontainers.image.description="Inference GLM-5.3-Flash cu130 32768" \
+LABEL org.opencontainers.image.source="https://github.com/compass-group-tue/FIGSBench" \
+    org.opencontainers.image.title="figsbench-judge" \
+    org.opencontainers.image.description="FIGS judge: GLM-5.3-Flash on vLLM (CUDA 13.0)" \
     org.opencontainers.image.base.name="vllm/vllm-openai:glm53-flash"
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -14,7 +16,6 @@ ENV LD_LIBRARY_PATH=/usr/local/cuda/compat:/usr/local/cuda/lib64:${LD_LIBRARY_PA
     VLLM_MARLIN_USE_ATOMIC_ADD=1 \
     VLLM_ALLREDUCE_USE_FLASHINFER=1 \
     VLLM_USE_BREAKABLE_CUDAGRAPH=0 \
-    TOOLKIT_WEIGHTS=/weights \
     HF_HOME=/cache
 
 USER root

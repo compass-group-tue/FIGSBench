@@ -1,4 +1,4 @@
-key: deepseek-v4-flash
+# vLLM settings of the DeepSeek-V4-Flash user-simulator server used for the paper.
 hf_repo: deepseek-ai/DeepSeek-V4-Flash
 tensor_parallel_size: 8
 max_model_len: 16384
@@ -13,6 +13,6 @@ tool_call_parser: deepseek_v4
 reasoning_parser: deepseek_v4
 trust_remote_code: true
 use_docker: true
-docker_image: vllm-dsv4-flash:cu130-breakable
+docker_image: figsbench-user-simulator:deepseek-v4-flash
 vllm_extra_args: ["--optimization-level", "3", "--no-enable-prefix-caching", "-cc.cudagraph_mode=FULL_DECODE_ONLY"]
 description: DeepSeek-V4-Flash MoE FP4/FP8, breakable cudagraph, CUDA compat

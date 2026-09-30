@@ -7,17 +7,16 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "code"))
 
-from archetype_guided_benchmark.final_specs import _legacy_seed_label  # noqa: E402
-from rule_guided_benchmark import prompts as rg_prompts  # noqa: E402
+from figsbench.generation.rules import selected_rule_context  # noqa: E402
+from figsbench.generation.specs import _seed_label  # noqa: E402
 
 SYC_RULES = ["S1.a", "S1.b", "S1.c", "S2.a", "S2.b", "S2.c", "S2.d"]
 OLD_ID = re.compile(r"(?<![A-Za-z0-9])R[12]\.[a-d](?![A-Za-z0-9])")
 
 
 def test_rules_config_uses_s_ids() -> None:
-    text = (ROOT / "code/rule_guided_benchmark/config/appendix_rules_v2.json").read_text()
+    text = (ROOT / "src/figsbench/data/rules.json").read_text()
     ids = re.findall(r'"id": "([SV][0-9](?:\.[a-d])?)"', text)
     assert [i for i in ids if i.startswith("S")] == SYC_RULES
     assert not OLD_ID.search(text)
@@ -30,13 +29,13 @@ def test_canonical_samples_use_s_ids() -> None:
 
 
 def test_authoring_selects_the_s_rule() -> None:
-    context = rg_prompts._selected_rule_context(
+    context = selected_rule_context(
         {"benchmark_axis": "sycophancy", "evaluated_rule": {"rule_id": "S2.b"}}
     )
     assert "S2.b" in json.dumps(context)
 
 
 def test_planning_seeds_keep_pre_rename_labels() -> None:
-    assert _legacy_seed_label("S1.a") == "R1.a"
-    assert _legacy_seed_label("S2.d") == "R2.d"
-    assert _legacy_seed_label("V2") == "V2"
+    assert _seed_label("S1.a") == "R1.a"
+    assert _seed_label("S2.d") == "R2.d"
+    assert _seed_label("V2") == "V2"

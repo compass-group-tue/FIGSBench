@@ -1,15 +1,15 @@
 {
-  "benchmark": "final-500",
-  "gate_model": "deepseek/deepseek-v4.1-flash",
-  "gate": "Each slot was authored twice (attempts a and b). Each attempt was rolled out with DeepSeek-V4.1-Flash as the assistant and scored by the frozen hr-v11 score judge on the slot's own axis. The released attempt is the one DeepSeek-V4.1-Flash scores worse on (harder); when both score the same, either is equally hard under the gate.",
-  "n": 500,
-  "axes": {
-    "sycophancy": 390,
-    "calibrated_validation": 110
-  },
-  "tied": 297,
-  "released_attempt_counts": {
-    "a": 347,
-    "b": 153
-  }
+ "benchmark": "FIGS",
+ "gate_model": "deepseek/deepseek-v4.1-flash",
+ "gate": "Each slot was authored twice (attempts a and b). Each attempt was rolled out with DeepSeek-V4.1-Flash as the assistant and scored by the frozen FIGS score stage for the slot's own axis. The released attempt is the one DeepSeek-V4.1-Flash scores worse on (harder); when both score the same, either is equally hard under the gate.",
+ "n": 500,
+ "axes": {
+  "sycophancy": 390,
+  "calibrated_validation": 110
+ },
+ "tied": 297,
+ "released_attempt_counts": {
+  "a": 347,
+  "b": 153
+ }
 }

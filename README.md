@@ -15,6 +15,7 @@ conversation on both axes.
 * Dataset: [huggingface.co/datasets/compass-group-tue/FIGSBench](https://huggingface.co/datasets/compass-group-tue/FIGSBench)
 * Judge and user-simulator images: [huggingface.co/compass-group-tue/FIGSBench-images](https://huggingface.co/compass-group-tue/FIGSBench-images)
 * Browse all 500 samples offline: open `viewer/index.html` in a browser
+* Code: this repository (`src/figsbench/`)
 
 ## Install
 
@@ -23,7 +24,7 @@ Python 3.11 or newer. The code has no third-party runtime dependencies.
 ```bash
 git clone https://github.com/compass-group-tue/FIGSBench && cd FIGSBench
 python -m pip install -e .
-cp code/.env.example code/.env      # set OPENROUTER_API_KEY and, for self-hosting, the endpoint URLs
+cp .env.example .env      # set OPENROUTER_API_KEY and, for self-hosting, the endpoint URLs
 ```
 
 ## Evaluate a model
@@ -49,9 +50,8 @@ WEIGHTS=/weights/DeepSeek-V4-Flash PORT=8001 bash docker/deepseek-v4-flash/serve
 # 4. Evaluate
 export LOCAL_GLM_BASE_URL=http://<judge-host>:8000/v1
 export LOCAL_USER_BASE_URL=http://<user-host>:8001/v1
-cd code
-python -m benchmark.eval_api.run --samples ../data/benchmark_500.jsonl \
-  --model openai/gpt-5.6-luna --judge local --output-dir ../runs/my-model
+python -m figsbench.evaluation --samples data/benchmark_500.jsonl \
+  --model openai/gpt-5.6-luna --judge local --output-dir runs/my-model
 ```
 
 `--model` takes any OpenRouter model id. To evaluate a model you serve yourself, pass
@@ -64,9 +64,8 @@ The user simulator and the judge can also run through OpenRouter. `--user-model 
 prompts. Pick another judge with `--judge-model`.
 
 ```bash
-cd code
-python -m benchmark.eval_api.run --samples ../data/benchmark_500.jsonl \
-  --model openai/gpt-5.6-luna --user-model api --judge api --output-dir ../runs/my-model-openrouter
+python -m figsbench.evaluation --samples data/benchmark_500.jsonl \
+  --model openai/gpt-5.6-luna --user-model api --judge api --output-dir runs/my-model-openrouter
 ```
 
 The paper's numbers use the self-hosted setup, so scores from other judges or simulators are not
@@ -78,18 +77,19 @@ A finished run writes `runs/<name>/metrics.json`. `benchmark_score` is 100 × th
 of the ten per-rule pass rates. A sample passes when the judge gives it a score of 1 on its target
 axis. The file also has per-axis and per-rule breakdowns. Interrupted runs resume where they
 stopped, and `--limit 2 --judge skip` runs a quick smoke test that only needs `OPENROUTER_API_KEY`.
+`figsbench-score runs/my-model` recomputes `metrics.json` from the saved judgments.
 
 The same evaluation from Python:
 
 ```python
-from benchmark.eval_api import EvalConfig, evaluate
+from figsbench.evaluation import EvalConfig, evaluate
 
 report = evaluate(EvalConfig(
-    samples="../data/benchmark_500.jsonl",
+    samples="data/benchmark_500.jsonl",
     model_under_test="openai/gpt-5.6-luna",
-    assistant_prompt="baseline",        # prompts/assistant/*.txt, or a path to your own
+    assistant_prompt="baseline",        # src/figsbench/prompts/assistant/*.txt, or a path to your own
     judge="local",
-    output_dir="../runs/my-model",
+    output_dir="runs/my-model",
     workers=20,
 ))
 ```
@@ -149,27 +149,36 @@ GLM-5.3-Flash rewrote each scenario plan into a concrete turn-by-turn plan.
 To write new scenarios with the same pipeline:
 
 ```bash
-cd code
-python scripts/make_specs.py --seed 42 --output /tmp/specs.json
-python -m archetype_guided_benchmark.run_final --axis syc --specs-file /tmp/specs.json \
-  --seed-corpus source_corpus/data/example-seeds-v1/seeds.jsonl --run-id-syc my-syc --limit 2
+python scripts/make_specs.py --seed 42 --output runs/specs.json
+python -m figsbench.generation --axis sycophancy --specs-file runs/specs.json \
+  --seed-corpus src/figsbench/data/example_seeds/seeds.jsonl --output-dir runs/my-authoring --limit 2
+python -m figsbench.generation.expand runs/my-authoring/sycophancy/samples.jsonl runs/my-benchmark.jsonl \
+  --base-url http://<judge-host>:8000/v1
 ```
 
-The seed corpus used for the paper is not included. `--seed-corpus` takes any corpus in the format
-of `code/source_corpus/data/example-seeds-v1/`. Add `--dry-run` to print the plan without calling
-any model.
+The seed corpus used for the paper is not included. `--seed-corpus` takes any JSONL file in the
+format of `src/figsbench/data/example_seeds/`. Add `--dry-run` to print the plan without calling
+any model. `examples/rendered_prompts/` shows every authoring and judge prompt filled in for one
+sycophancy and one calibrated-validation scenario.
 
 ## Repository layout
 
 ```
-data/benchmark_500.jsonl   the 500 scenarios
-data/judge_ratings_1000.jsonl  1,000 conversations rated by the judge
-data/provenance/           selection record, pre-expansion scenarios, slot specs, generation plans
-viewer/index.html          offline viewer
-prompts/                   judge, assistant and expansion prompts (see prompts/README.md)
-code/                      authoring, evaluation and judging code
-docker/                    serving scripts and image recipes (see docker/README.md)
-tests/                     test suite (pytest)
+data/benchmark_500.jsonl        the 500 scenarios
+data/judge_ratings_1000.jsonl   1,000 conversations rated by the judge
+data/provenance/                selection record, pre-expansion scenarios, generation plans
+viewer/index.html               offline viewer
+src/figsbench/
+  evaluation/                   run a model through the benchmark
+  judge/                        the four-stage judge
+  generation/                   the scenario authoring pipeline and the plan expansion step
+  prompts/                      every prompt: assistant, user simulator, authoring, judge, expansion
+  data/                         rules, archetypes, texting styles, slot grid, example seeds
+  metrics.py, validate.py       scoring and the data validator
+scripts/                        slot grid, rendered prompt examples, viewer builder
+examples/rendered_prompts/      authoring and judge prompts filled in for two scenarios
+docker/                         serving scripts and image recipes (see docker/README.md)
+tests/                          test suite (pytest)
 ```
 
 ## License
